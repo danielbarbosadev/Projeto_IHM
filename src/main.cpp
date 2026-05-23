@@ -6,16 +6,24 @@
 #include "WiFiManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
+#include "secrets.h"
+
+//* ENUM
+enum Topicos
+{
+  PROJETOR,
+  TELA,
+  TELEVISAO,
+  LAMPADAS,
+  AR_CONDICIONADO,
+  TOPICO_INVALIDO
+};
 
 //* PROTÓTIPOS DAS FUNÇÕES
 void tratarMensagemRecebida(const char*, const String&);
-void tratarJsonComando(const String&);
-void publicarRequisicao();
+void tratarJson(const String&, Topicos);
+Topicos identificarTopicos(const char* topico);
 
-//* CONSTANTES
-const char TOPICO_COMANDO[] = "topico/receber/1";
-
-bool pedidoRequisicao = true;
 
 void setup() 
 {
@@ -31,7 +39,6 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
-  publicarRequisicao();
 }
 
 void tratarMensagemRecebida(const char* topico, const String& mensagem)
@@ -49,24 +56,24 @@ void tratarMensagemRecebida(const char* topico, const String& mensagem)
   debugInfo("Tópico: " + String(topico));
   debugInfo("Mensagem: " + mensagem);
 
-  if (strcmp(topico, TOPICO_COMANDO) == 0)
+  Topicos topicoRecebido = identificarTopicos(topico);
+
+  if(topicoRecebido == TOPICO_INVALIDO)
   {
-    tratarJsonComando(mensagem);
+    debugErro("Tópico não tratado " + String(topico));
     return;
   }
 
-  debugErro("Tópico não tratado " + String(topico));
-
+    tratarJson(mensagem, topicoRecebido);
 }
 
-void tratarJsonComando(const String& mensagem)
+void tratarJson(const String& mensagem, Topicos topico)
 {
   JsonDocument doc;
 
   DeserializationError erro = deserializeJson(doc, mensagem);
 
-  static bool requisicaoAceita = true;
-
+  static bool handshake;
 
   if(erro)
   {
@@ -75,49 +82,30 @@ void tratarJsonComando(const String& mensagem)
     return;
   }
 
-  if (!doc["requisicaoAceita"].is<bool>())
+  if(doc["handshake"].is<bool>())
   {
-    debugErro("JSON inválido, utilize requisicaoAceita ");
-  }
-  else
-  {
-    requisicaoAceita = doc["requisicaoAceita"].as<bool>();
+    handshake = doc["handshake"].as<bool>();
 
-    if(!requisicaoAceita)
+    if(handshake)
     {
-      pedidoRequisicao = true;
+
     }
     else
     {
-      pedidoRequisicao = false;
+      
     }
   }
 }
 
-void publicarRequisicao()
+Topicos identificarTopicos(const char* topico)
 {
-  JsonDocument doc;
-  String mensagem = "";
-  static bool ligarProjetor;
-
-  if(pedidoRequisicao)
+  for (size_t i = 0; i < obterTotalTopicosRecebimento(); i++)
   {
-    uint32_t agora = millis();
-    uint32_t tempoInicial = 0;
-
-    if(agora - tempoInicial >= 2000)
+    if(strcmp(topico, TOPICOS_RECEBER[i]) == 0)
     {
-      tempoInicial = agora;
-      ligarProjetor = true;
-      doc["projetor"]["ligar"] = ligarProjetor;
-      serializeJson(doc, mensagem);
-      publicarMensagemNoTopico(0, mensagem.c_str());
-      pedidoRequisicao = false;
+      return (Topicos)i;
     }
+  }  
 
-  }
-  else
-  {
-    return;
-  }
+  return TOPICO_INVALIDO;
 }
