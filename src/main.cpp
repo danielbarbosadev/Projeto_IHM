@@ -7,26 +7,21 @@
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "secrets.h"
+#include "moduloProjetor.h"
 
-//* ENUM
-enum Topicos
-{
-  PROJETOR,
-  TELA,
-  TELEVISAO,
-  LAMPADAS,
-  AR_CONDICIONADO,
-  TOPICO_INVALIDO
-};
+//* CONSTANTES
+
 
 //* PROTÓTIPOS DAS FUNÇÕES
-void tratarMensagemRecebida(const char*, const String&);
-void tratarJson(const String&, Topicos);
-Topicos identificarTopicos(const char* topico);
+modulos identificarTopicos(const char *topico);
+void tratarMensagemRecebida(const char *, const String &);
+void tratarJsonRequisicoes(const String &, modulos);
 
 
-void setup() 
+
+void setup()
 {
+  configurarPinoBoot();
   configurarDebug();
   conectarWiFi();
   configurarMQTT();
@@ -34,19 +29,20 @@ void setup()
   conectarMQTT();
 }
 
-void loop() 
+void loop()
 {
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
+  definirComandoProjetor();
 }
 
-void tratarMensagemRecebida(const char* topico, const String& mensagem)
+void tratarMensagemRecebida(const char *topico, const String &mensagem)
 {
   debugInfo("================================");
   debugInfo("Mensagem recebida na aplicação");
   debugInfo("================================");
-  
+
   if (topico == nullptr)
   {
     debugErro("Tópico MQTT inválido");
@@ -56,18 +52,18 @@ void tratarMensagemRecebida(const char* topico, const String& mensagem)
   debugInfo("Tópico: " + String(topico));
   debugInfo("Mensagem: " + mensagem);
 
-  Topicos topicoRecebido = identificarTopicos(topico);
+  modulos moduloRecebido = identificarTopicos(topico);
 
-  if(topicoRecebido == TOPICO_INVALIDO)
+  if (moduloRecebido == TOPICO_INVALIDO)
   {
-    debugErro("Tópico não tratado " + String(topico));
+    debugErro("Tópico não tratado: " + String(topico));
     return;
   }
 
-    tratarJson(mensagem, topicoRecebido);
+  tratarJsonRequisicoes(mensagem, moduloRecebido);
 }
 
-void tratarJson(const String& mensagem, Topicos topico)
+void tratarJsonRequisicoes(const String &mensagem, modulos moduloRecebido)
 {
   JsonDocument doc;
 
@@ -75,37 +71,45 @@ void tratarJson(const String& mensagem, Topicos topico)
 
   static bool handshake;
 
-  if(erro)
+  if (erro)
   {
     debugErro("Erro ao interpretar JSON");
     debugErro(erro.c_str());
     return;
   }
 
-  if(doc["handshake"].is<bool>())
+  switch (moduloRecebido)
   {
-    handshake = doc["handshake"].as<bool>();
-
-    if(handshake)
+  case PROJETOR:
+    if (doc["handshake"]["situacao"].is<bool>())
     {
+      handshake = doc["handshake"]["situacao"].as<bool>();
 
+      if (!handshake)
+      {
+        debugErro("Falha no comando reenvie denovo");
+      }
+      else
+      {
+        debugInfo("Comando confirmado");
+      }
     }
-    else
-    {
-      
-    }
+    break;
   }
 }
 
-Topicos identificarTopicos(const char* topico)
+
+
+modulos identificarTopicos(const char *topico)
 {
   for (size_t i = 0; i < obterTotalTopicosRecebimento(); i++)
   {
-    if(strcmp(topico, TOPICOS_RECEBER[i]) == 0)
+    if (strcmp(topico, TOPICOS_RECEBER[i]) == 0)
     {
-      return (Topicos)i;
+      return modulos(i);
     }
-  }  
+  }
 
   return TOPICO_INVALIDO;
 }
+
