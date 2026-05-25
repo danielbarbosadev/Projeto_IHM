@@ -7,17 +7,13 @@
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "secrets.h"
-#include "moduloProjetor.h"
-
-//* CONSTANTES
-
+#include "Enum.h"
+#include "Projetor.h"
 
 //* PROTÓTIPOS DAS FUNÇÕES
 modulos identificarTopicos(const char *topico);
 void tratarMensagemRecebida(const char *, const String &);
-void tratarJsonRequisicoes(const String &, modulos);
-
-
+void tratarJsonHandshake(const String &, modulos);
 
 void setup()
 {
@@ -34,7 +30,7 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
-  definirComandoProjetor();
+  loopComandoProjetor();
 }
 
 void tratarMensagemRecebida(const char *topico, const String &mensagem)
@@ -54,22 +50,20 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
 
   modulos moduloRecebido = identificarTopicos(topico);
 
-  if (moduloRecebido == TOPICO_INVALIDO)
+  if (moduloRecebido == MODULO_INVALIDO)
   {
     debugErro("Tópico não tratado: " + String(topico));
     return;
   }
 
-  tratarJsonRequisicoes(mensagem, moduloRecebido);
+  tratarJsonHandshake(mensagem, moduloRecebido);
 }
 
-void tratarJsonRequisicoes(const String &mensagem, modulos moduloRecebido)
+void tratarJsonHandshake(const String &mensagem, modulos moduloRecebido)
 {
   JsonDocument doc;
 
   DeserializationError erro = deserializeJson(doc, mensagem);
-
-  static bool handshake;
 
   if (erro)
   {
@@ -81,13 +75,19 @@ void tratarJsonRequisicoes(const String &mensagem, modulos moduloRecebido)
   switch (moduloRecebido)
   {
   case PROJETOR:
+    verificarHandshakeProjetor(doc);
+    break;
+
+  case TELA:
+  //TODO Implementar arquivo Tela.cpp
+    static bool handshakeTela;
     if (doc["handshake"]["situacao"].is<bool>())
     {
-      handshake = doc["handshake"]["situacao"].as<bool>();
+      handshakeTela = doc["handshake"]["situacao"].as<bool>();
 
-      if (!handshake)
+      if (!handshakeTela)
       {
-        debugErro("Falha no comando reenvie denovo");
+        debugErro("Falha ao encontrar comando, reenvie novamente");
       }
       else
       {
@@ -95,10 +95,84 @@ void tratarJsonRequisicoes(const String &mensagem, modulos moduloRecebido)
       }
     }
     break;
+
+  case TELEVISAO:
+  //TODO Implementar arquivo Televisao.cpp
+    static bool handshakeTelevisao;
+    if (doc["handshake"]["situacao"].is<bool>())
+    {
+      handshakeTelevisao = doc["handshake"]["situacao"].as<bool>();
+
+      if (!handshakeTelevisao)
+      {
+        debugErro("Falha no comando, reenvie denovo");
+      }
+      else
+      {
+        debugInfo("Comando confirmado");
+      }
+    }
+    break;
+
+  case LAMPADAS:
+  //TODO Implementar arquivo Lampadas.cpp
+    static bool handshakeLampadas;
+    if (doc["handshake"]["situacao"].is<bool>())
+    {
+      handshakeLampadas = doc["handshake"]["situacao"].as<bool>();
+
+      if (!handshakeLampadas)
+      {
+        debugErro("Falha no comando, reenvie denovo");
+      }
+      else
+      {
+        debugInfo("Comando confirmado");
+      }
+    }
+    break;
+
+  case AR_CONDICIONADO:
+  //TODO Implementar arquivo Ar_Condicionado.cpp
+    static bool handshakeArCondicionado;
+    if (doc["handshake"]["situacao"].is<bool>())
+    {
+      handshakeArCondicionado = doc["handshake"]["situacao"].as<bool>();
+
+      if (!handshakeArCondicionado)
+      {
+        debugErro("Falha no comando, reenvie denovo");
+      }
+      else
+      {
+        debugInfo("Comando confirmado");
+      }
+    }
+    break;
+
+  case TEMPERATURA:
+  //TODO Implementar arquivo Temperatura.cpp
+    static bool handshakeTemperatura;
+    if (doc["handshake"]["situacao"].is<bool>())
+    {
+      handshakeTemperatura = doc["handshake"]["situacao"].as<bool>();
+
+      if (!handshakeTemperatura)
+      {
+        debugErro("Falha no comando, reenvie denovo");
+      }
+      else
+      {
+        debugInfo("Comando confirmado");
+      }
+    }
+    break;
+
+    default:
+      debugErro("Módulo inexistente");
+      break;
   }
 }
-
-
 
 modulos identificarTopicos(const char *topico)
 {
@@ -109,7 +183,5 @@ modulos identificarTopicos(const char *topico)
       return modulos(i);
     }
   }
-
-  return TOPICO_INVALIDO;
+  return MODULO_INVALIDO;
 }
-
