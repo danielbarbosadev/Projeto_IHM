@@ -1,7 +1,11 @@
-// BIBLIOTECAS
+//* ======================
+//* BIBLIOTECAS
+//*=======================
 #include <Arduino.h>
 
-// ARQUIVOS LOCAIS
+//* ======================
+//* ARQUIVOS LOCAIS
+//*=======================
 #include "DebugManager.h"
 #include "secrets.h"
 

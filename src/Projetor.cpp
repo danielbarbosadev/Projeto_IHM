@@ -1,4 +1,6 @@
+//* ======================
 //* ARQUIVOS LOCAIS
+//*=======================
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "Enum.h"
@@ -25,11 +27,11 @@ void verificarHandshakeProjetor(JsonDocument &doc)
 
         if (!handshakeProjetor)
         {
-            debugErro("Falha no comando, reenvie denovo");
+            debugErro("Falha no comando do módulo Projetor, reenvie denovo");
         }
         else
         {
-            debugInfo("Comando confirmado");
+            debugInfo("Comando do módulo Projetor confirmado");
         }
     }
 }
@@ -50,6 +52,10 @@ void loopComandoProjetor()
     static bool estadoAnteriorBotao = 1;
     const char *comandoProjetor = nullptr;
 
+    
+    //* ======================
+    //* APENAS TESTE
+    //*=======================
     if (estadoAtualBotao && !estadoAnteriorBotao)
     {
         comandoProjetor = "power";

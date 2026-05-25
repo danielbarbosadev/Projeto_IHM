@@ -1,23 +1,29 @@
+//* ======================
 //* BIBLIOTECAS
+//*=======================
 #include <Arduino.h>
 #include <WiFiClient.h>
 #include <WiFiClientSecure.h> 
 #include <PubSubClient.h>
 
+//* ======================
 //* ARQUIVOS LOCAIS
+//*=======================
 #include "secrets.h"
 #include "WiFiManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
 
-//* Criação de objetos
-
+//* ======================
+//* INSTÂNCIAS
+//*=======================
 WiFiClient wifiClient;
 WiFiClientSecure wifiClientSecure;
 
 PubSubClient mqttClient;
 
 CallbackMensagemMQTT callbackDaAplicacao = nullptr;
+
 
 void registrarCallbackMensagem(CallbackMensagemMQTT callback)
 {

@@ -1,9 +1,13 @@
-// BIBLIOTECAS
+//* ======================
+//* BIBLIOTECAS
+//*=======================
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 
-// ARQUIVOS LOCAIS
+//* ======================
+//* ARQUIVOS LOCAIS
+//*=======================
 #include "WiFiManager.h"
 #include "secrets.h"
 #include "debugManager.h"
