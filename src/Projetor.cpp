@@ -46,16 +46,16 @@ void enviarComandoProjetor(const char* comandoProjetor)
     publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
 }
 
-void loopComandoProjetor()
+
+//* ================================================
+//* APENAS TESTE, TODA ESSA FUNÇÃO VAI SUMIR DEPOIS
+//*=================================================
+void processarComandoProjetor()
 {
     bool estadoAtualBotao = !digitalRead(PINO_BOTAO_BOOT);
     static bool estadoAnteriorBotao = 1;
     const char *comandoProjetor = nullptr;
 
-    
-    //* ======================
-    //* APENAS TESTE
-    //*=======================
     if (estadoAtualBotao && !estadoAnteriorBotao)
     {
         comandoProjetor = "power";
