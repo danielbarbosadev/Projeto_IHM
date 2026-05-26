@@ -42,7 +42,7 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
-  loopComandoProjetor();
+  processarComandoProjetor();
 }
 
 void tratarMensagemRecebida(const char *topico, const String &mensagem)
