@@ -4,6 +4,6 @@
 #include <ArduinoJson.h>
 
 void verificarHandshakeTemperatura(JsonDocument &doc);
-
+void enviarComandoTemperatura();
 
 #endif

@@ -29,3 +29,15 @@ void verificarHandshakeTemperatura(JsonDocument &doc)
         }
     }
 }
+
+void enviarComandoTemperatura()
+{
+    bool enviarDados = true;
+    JsonDocument doc;
+    String mensagem;
+
+    doc["temperatura"]["comando"] = enviarDados;
+    serializeJson(doc, mensagem);
+    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+    enviarDados = false;
+}
