@@ -29,7 +29,8 @@ void tratarJsonHandshake(const String &, modulos);
 
 void setup()
 {
-  configurarPinoBoot();
+  configurarInicializacaoNextion();
+  configurarEventosNextion();
   configurarDebug();
   conectarWiFi();
   configurarMQTT();
@@ -42,7 +43,7 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
-  processarComandoProjetor();
+  nexLoop();
 }
 
 void tratarMensagemRecebida(const char *topico, const String &mensagem)
