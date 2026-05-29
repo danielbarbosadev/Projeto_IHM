@@ -2,13 +2,13 @@
 #define PROJETOR_H
 
 #include <ArduinoJson.h>
+#include <Arduino.h>
 
 extern const char *comandoProjetor;
 extern const char PINO_BOTAO_BOOT;
 
 void verificarHandshakeProjetor(JsonDocument& doc);
-void configurarPinoBoot();
 void enviarComandoProjetor(const char* comandoProjetor);
-void processarComandoProjetor();
+void processarComandoProjetor(uint32_t estadoPowerProjetor);
 
 #endif

@@ -8,11 +8,6 @@
 
 const char PINO_BOTAO_BOOT = 0;
 
-void configurarPinoBoot()
-{
-    pinMode(PINO_BOTAO_BOOT, INPUT_PULLUP);
-}
-
 void verificarHandshakeProjetor(JsonDocument &doc)
 {
     if (doc["handshake"]["situacao"].isNull())
@@ -36,7 +31,7 @@ void verificarHandshakeProjetor(JsonDocument &doc)
     }
 }
 
-void enviarComandoProjetor(const char* comandoProjetor)
+void enviarComandoProjetor(uint8_t comandoProjetor)
 {
     JsonDocument doc;
     String mensagem = "";
@@ -46,43 +41,22 @@ void enviarComandoProjetor(const char* comandoProjetor)
     publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
 }
 
-
-//* ================================================
-//* APENAS TESTE, TODA ESSA FUNÇÃO VAI SUMIR DEPOIS
-//*=================================================
-void processarComandoProjetor()
+void processarComandoProjetor(uint32_t estadoPowerProjetor)
 {
-    bool estadoAtualBotao = !digitalRead(PINO_BOTAO_BOOT);
     static bool estadoAnteriorBotao = 1;
-    const char *comandoProjetor = nullptr;
-
-    if (estadoAtualBotao && !estadoAnteriorBotao)
+    int8_t comandoProjetor = -1;
+    if(estadoPowerProjetor)
     {
-        comandoProjetor = "power";
+        comandoProjetor = 0;
     }
-    estadoAnteriorBotao = estadoAtualBotao;
-
-    if (estadoAtualBotao && !estadoAnteriorBotao)
+    else
     {
-        comandoProjetor = "desligar";
+        comandoProjetor = 1;
     }
-    estadoAnteriorBotao = estadoAtualBotao;
 
-    if (estadoAtualBotao && !estadoAnteriorBotao)
-    {
-        comandoProjetor = "hdmi";
-    }
-    estadoAnteriorBotao = estadoAtualBotao;
-
-    if (estadoAtualBotao && !estadoAnteriorBotao)
-    {
-        comandoProjetor = "mudo";
-    }
-    estadoAnteriorBotao = estadoAtualBotao;
-
-    if (comandoProjetor != nullptr)
+    if (comandoProjetor != -1)
     {
         enviarComandoProjetor(comandoProjetor);
-        comandoProjetor = nullptr;
+        comandoProjetor = -1;
     }
 }
