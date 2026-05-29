@@ -29,3 +29,32 @@ void verificarHandshakeLampadas(JsonDocument &doc)
         }
     }
 }
+
+void processarComandoLampada(uint32_t estadoPowerLampada)
+{
+    int8_t comandoLampada = -1;
+    if(estadoPowerLampada)
+    {
+        comandoLampada = 0; //DESLIGAR
+    }
+    else
+    {
+        comandoLampada = 1; //LIGAR
+    }
+
+    if (comandoLampada != -1)
+    {
+        enviarComandoLampada(comandoLampada);
+        comandoLampada = -1;
+    }
+}
+
+void enviarComandoLampada(int8_t comandoLampada)
+{
+    JsonDocument doc;
+    String mensagem;
+
+    doc["lampada"]["comando"] = comandoLampada;
+    serializeJson(doc, mensagem);
+    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+}
