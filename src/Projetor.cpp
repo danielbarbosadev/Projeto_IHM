@@ -43,15 +43,14 @@ void enviarComandoProjetor(uint8_t comandoProjetor)
 
 void processarComandoProjetor(uint32_t estadoPowerProjetor)
 {
-    static bool estadoAnteriorBotao = 1;
     int8_t comandoProjetor = -1;
     if(estadoPowerProjetor)
     {
-        comandoProjetor = 0;
+        comandoProjetor = 0; //DESLIGAR
     }
     else
     {
-        comandoProjetor = 1;
+        comandoProjetor = 1; //LIGAR
     }
 
     if (comandoProjetor != -1)

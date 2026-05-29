@@ -5,10 +5,9 @@
 #include <Arduino.h>
 
 extern const char *comandoProjetor;
-extern const char PINO_BOTAO_BOOT;
 
 void verificarHandshakeProjetor(JsonDocument& doc);
-void enviarComandoProjetor(const char* comandoProjetor);
+void enviarComandoProjetor(uint8_t comandoProjetor);
 void processarComandoProjetor(uint32_t estadoPowerProjetor);
 
 #endif
