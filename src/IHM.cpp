@@ -1,11 +1,7 @@
-
 #include <Arduino.h>
+#include <Nextion.h>
 
-//* ======================
-//* ARQUIVOS LOCAIS
-//*=======================
 #include "IHM.h"
-#include "MqttManager.h"
 #include "DebugManager.h"
 #include "Projetor.h"
 #include "Tela.h"
@@ -15,22 +11,17 @@
 #include "Temperatura.h"
 
 uint32_t NEXTION_BAUD_RATE = 9600;
+uint8_t NEXTION_PIN_TX = 17;
+uint8_t NEXTION_PIN_RX = 18;
 
-uint8_t NEXTION_PIN_TX = 18; //Pino TX vai no RX do Nextion
-
-uint8_t NEXTION_PIN_RX = 17; //Pino RX vai no TX do Nextion
-
-//* ======================
-//* INSTÂNCIAS
-//*=======================
-
-//* SIMPLE BUTTON 
-NexButton bntMenuInicial(1, 2, "BotaoInicial");
-NexButton btnMenuTelevisao(1, 1, "BotaoMenuTV");
-NexButton btnMenuLampadas(1, 2, "BotaoMenuLPD");
-NexButton btnMenuArCondicionado(1, 3, "BotaoMenuAC");
-NexButton btnMenuTemperatura(1, 4, "BotaoMenuTemp");
-NexButton btnMenuProjetorTela(1, 5, "BotaoMenuPT");
+NexButton BTN_MENU_TV(1, 1, "BotaoMenuTV");
+NexButton BTN_MENU_LAMPADA(1, 2, "BotaoMenuLPD");
+NexButton BTN_MENU_AC(1, 3, "BotaoMenuAC");
+NexButton BTN_MENU_TEMP(1, 4, "BotaoMenuTemp");
+NexButton BTN_MENU_PROJETOR(1, 5, "BotaoMenuPT");
+NexButton BTN_MENU_TELA(1, 6, "BotaoMenuTela");
+NexDSButton BTN_TESTE_DUAL(1, 7, "btnTestDual");
+NexButton BTN_TESTE_SIMPLE(1, 8, "btnTesteSimple");
 
 void configurarInicializacaoNextion()
 {
@@ -48,24 +39,23 @@ void configurarInicializacaoNextion()
 
 void configurarEventosNextion()
 {
-    btnMenuArCondicionado.attachPop(configurarTelaArCondicionado);
-    //btnMenuTelevisao.attachPop();
-    //btnMenuLampadas.attachPop();
-    //btnMenuProjetorTela.attachPop();
-    //btnMenuTemperatura.attachPop();
+    BTN_TESTE_DUAL.attachPop(soltouBotaoDual);
+    BTN_TESTE_SIMPLE.attachPop(soltouBotaoSimple);
 
-    nexClearListenList();
-
-    nexListen(btnMenuArCondicionado);
-    nexListen(btnMenuLampadas);
-    nexListen(btnMenuTemperatura);
-    nexListen(btnMenuProjetorTela);
-    nexListen(btnMenuTelevisao);
+    nexListen(BTN_TESTE_DUAL);
+    nexListen(BTN_TESTE_SIMPLE);
 }
 
-void configurarTelaArCondicionado()
+void soltouBotaoDual()
 {
-    sendCommand("ArCondicionado");
+    uint32_t estadoBotaoDual;
+    BTN_TESTE_DUAL.getValue(&estadoBotaoDual);
+
+    processarComandoProjetor(estadoBotaoDual);  
+    
 }
 
+void soltouBotaoSimple()
+{
 
+}

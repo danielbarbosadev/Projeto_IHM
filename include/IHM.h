@@ -3,18 +3,25 @@
 
 #include <Nextion.h>
 
+extern uint32_t NEXTION_BAUD_RATE;
+
+extern uint8_t NEXTION_PIN_TX;
+
+extern uint8_t NEXTION_PIN_RX;
+
 //* SIMPLE BUTTON 
-NexButton bntMenuInicial(1, 2, "BotaoInicial");
-NexButton btnMenuTelevisao(1, 1, "BotaoMenuTV");
-NexButton btnMenuLampadas(1, 2, "BotaoMenuLPD");
-NexButton btnMenuArCondicionado(1, 3, "BotaoMenuAC");
-NexButton btnMenuTemperatura(1, 4, "BotaoMenuTemp");
-NexButton btnMenuProjetorTela(1, 5, "BotaoMenuPT");
+extern NexButton BTN_MENU_TV;
+extern NexButton BTN_MENU_LAMPADA;
+extern NexButton BTN_MENU_AC;
+extern NexButton BTN_MENU_TEMP;
+extern NexButton BTN_MENU_PROJETOR;
+extern NexButton BTN_MENU_TELA;
+extern NexDSButton BTN_TESTE_DUAL;
+extern NexButton BTN_TESTE_SIMPLE;
 
 void configurarInicializacaoNextion();
 void configurarEventosNextion();
-void configurarTelaArCondicionado();
-
-
+void soltouBotaoDual();
+void soltouBotaoSimple();
 
 #endif
