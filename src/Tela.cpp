@@ -6,6 +6,8 @@
 #include "Enum.h"
 #include "Tela.h"
 
+char telaAtual[] = "";
+
 void verificarHandshakeTela(JsonDocument &doc)
 {
     if (doc["handshake"]["situacao"].isNull())
@@ -27,4 +29,14 @@ void verificarHandshakeTela(JsonDocument &doc)
             debugInfo("Comando confirmado");
         }
     }
+}
+
+void enviarComandoTela(uint8_t comandoTela)
+{
+    JsonDocument doc;
+    String mensagem = "";
+    
+    doc[telaAtual]["comando"] = comandoTela;
+    serializeJson(doc, mensagem);
+    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
 }
