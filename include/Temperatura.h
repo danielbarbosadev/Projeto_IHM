@@ -1,9 +1,9 @@
 #ifndef TEMPERATURA_H
 #define TEMPERATURA_H
 
-#include <ArduinoJson.h>
 
-void verificarHandshakeTemperatura(JsonDocument &doc);
+
+void verificarHandshakeTemperatura(const String& mensagem);
 void enviarComandoTemperatura();
 
 #endif

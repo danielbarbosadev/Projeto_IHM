@@ -1,9 +1,7 @@
 #ifndef TELEVISAO_H
 #define TELEVISAO_H
 
-#include <ArduinoJson.h>
-
-void verificarHandshakeTelevisao(JsonDocument &doc);
+void verificarHandshakeTelevisao(const String& mensagem);
 
 
 #endif

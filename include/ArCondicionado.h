@@ -1,9 +1,9 @@
 #ifndef AR_CONDICIONADO_H
 #define AR_CONDICIONADO_H
 
-#include <ArduinoJson.h>
 
-void verificarHandshakeArCondicionado(JsonDocument &doc);
+
+void verificarHandshakeArCondicionado(const String& mensagem);
 
 
 #endif
