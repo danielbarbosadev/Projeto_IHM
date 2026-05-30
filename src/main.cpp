@@ -24,7 +24,6 @@
 //*=======================
 modulos identificarTopicos(const char *topico);
 void tratarMensagemRecebida(const char *, const String &);
-void tratarJsonHandshake(const String &, modulos);
 
 void setup()
 {
@@ -62,57 +61,36 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
 
   modulos moduloRecebido = identificarTopicos(topico);
 
-  if (moduloRecebido == MODULO_INVALIDO)
-  {
-    debugErro("Tópico não tratado: " + String(topico));
-    return;
-  }
-
-  tratarJsonHandshake(mensagem, moduloRecebido);
-}
-
-void tratarJsonHandshake(const String &mensagem, modulos moduloRecebido)
-{
-  JsonDocument doc;
-
-  DeserializationError erro = deserializeJson(doc, mensagem);
-
-  if (erro)
-  {
-    debugErro("Erro ao interpretar JSON");
-    debugErro(erro.c_str());
-    return;
-  }
-
   switch (moduloRecebido)
   {
   case PROJETOR:
-    verificarHandshakeProjetor(doc);
+    verificarHandshakeProjetor(mensagem);
     break;
 
   case TELA:
-    verificarHandshakeTela(doc);
+    verificarHandshakeTela(mensagem);
     break;
 
   case TELEVISAO:
-    verificarHandshakeTelevisao(doc);
+    verificarHandshakeTelevisao(mensagem);
     break;
 
   case LAMPADAS:
-    verificarHandshakeLampadas(doc);
+    verificarHandshakeLampadas(mensagem);
     break;
 
   case AR_CONDICIONADO:
-    verificarHandshakeArCondicionado(doc);
+    verificarHandshakeArCondicionado(mensagem);
     break;
 
   case TEMPERATURA:
-    verificarHandshakeTemperatura(doc);
+    verificarHandshakeTemperatura(mensagem);
     break;
 
-    default:
-      debugErro("Módulo inexistente");
-      break;
+  default:
+    debugErro("Tópico não tratado: " + String(topico));
+    return;
+    break;
   }
 }
 
