@@ -20,8 +20,7 @@ NexButton BTN_MENU_AC(1, 3, "BotaoMenuAC");
 NexButton BTN_MENU_TEMP(1, 4, "BotaoMenuTemp");
 NexButton BTN_MENU_PROJETOR(1, 5, "BotaoMenuPT");
 NexButton BTN_MENU_TELA(1, 6, "BotaoMenuTela");
-NexDSButton BTN_TESTE_DUAL(1, 7, "btnTestDual");
-NexButton BTN_TESTE_SIMPLE(1, 8, "btnTesteSimple");
+NexButton BTN_MENU_INICIAL(2, 1, "BotaoInicial");
 
 void configurarInicializacaoNextion()
 {
@@ -39,23 +38,7 @@ void configurarInicializacaoNextion()
 
 void configurarEventosNextion()
 {
-    BTN_TESTE_DUAL.attachPop(soltouBotaoDual);
-    BTN_TESTE_SIMPLE.attachPop(soltouBotaoSimple);
+  BTN_MENU_TEMP.attachPop(enviarComandoTemperatura);
 
-    nexListen(BTN_TESTE_DUAL);
-    nexListen(BTN_TESTE_SIMPLE);
-}
-
-void soltouBotaoDual()
-{
-    uint32_t estadoBotaoDual;
-    BTN_TESTE_DUAL.getValue(&estadoBotaoDual);
-
-    processarComandoProjetor(estadoBotaoDual);  
-    
-}
-
-void soltouBotaoSimple()
-{
-
+  nexListen(BTN_MENU_TEMP);
 }
