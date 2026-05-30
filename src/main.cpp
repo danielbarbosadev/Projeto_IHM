@@ -10,7 +10,6 @@
 #include "WiFiManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
-#include "secrets.h"
 #include "Enum.h"
 #include "Projetor.h"
 #include "Tela.h"
@@ -121,7 +120,7 @@ modulos identificarTopicos(const char *topico)
 {
   for (size_t i = 0; i < obterTotalTopicosRecebimento(); i++)
   {
-    if (strcmp(topico, TOPICOS_RECEBER[i]) == 0)
+    if (strcmp(topico, obterTopicoRecebimento(i)) == 0)
     {
       return modulos(i);
     }
