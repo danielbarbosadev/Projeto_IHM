@@ -12,4 +12,11 @@ enum modulos
   MODULO_INVALIDO
 };
 
+enum ComandosTela
+{
+  DESCER,
+  SUBIR,
+  PARAR
+};
+
 #endif
