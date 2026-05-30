@@ -1,3 +1,5 @@
+#include <ArduinoJson.h>
+
 //* ======================
 //* ARQUIVOS LOCAIS
 //*=======================
@@ -7,8 +9,19 @@
 #include "ArCondicionado.h"
 
 
-void verificarHandshakeArCondicionado(JsonDocument &doc)
+void verificarHandshakeArCondicionado(const String& mensagem)
 {
+    JsonDocument doc;
+
+    DeserializationError erro = deserializeJson(doc, mensagem);
+
+    if (erro)
+    {
+        debugErro("Erro ao interpretar JSON");
+        debugErro(erro.c_str());
+        return;
+    }
+
     if (doc["handshake"]["situacao"].isNull())
     {
         debugErro("Resposta da situação não foi enviada no JSON");
