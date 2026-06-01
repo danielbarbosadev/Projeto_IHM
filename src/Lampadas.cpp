@@ -74,5 +74,5 @@ void enviarComandoLampada(int8_t comandoLampada)
 
     doc["lampada"]["comando"] = comandoLampada;
     serializeJson(doc, mensagem);
-    publicarMensagemNoTopico(LAMPADAS, mensagem.c_str());
+    publicarMensagemNoTopico(TOPICO_LAMPADAS, mensagem.c_str());
 }

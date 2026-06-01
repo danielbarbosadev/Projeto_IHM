@@ -51,5 +51,5 @@ void enviarComandoTela(uint8_t comandoTela)
     
     doc[telaAtual]["comando"] = comandoTela;
     serializeJson(doc, mensagem);
-    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+    publicarMensagemNoTopico(TOPICO_TELA, mensagem.c_str());
 }

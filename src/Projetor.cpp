@@ -49,7 +49,7 @@ void enviarComandoProjetor(uint8_t comandoProjetor)
 
     doc["projetor"]["comando"] = comandoProjetor;
     serializeJson(doc, mensagem);
-    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+    publicarMensagemNoTopico(TOPICO_PROJETOR, mensagem.c_str());
 }
 
 void processarComandoProjetor(uint32_t estadoPowerProjetor)

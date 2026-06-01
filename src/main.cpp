@@ -21,7 +21,7 @@
 //* ======================
 //* PROTÓTIPOS DAS FUNÇÕES
 //*=======================
-modulos identificarTopicos(const char *topico);
+Topicos identificarTopicos(const char *topico);
 void tratarMensagemRecebida(const char *, const String &);
 
 void setup()
@@ -58,31 +58,31 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
   debugInfo("Tópico: " + String(topico));
   debugInfo("Mensagem: " + mensagem);
 
-  modulos moduloRecebido = identificarTopicos(topico);
+ Topicos topicoRecebido = identificarTopicos(topico);
 
-  switch (moduloRecebido)
+  switch (topicoRecebido)
   {
-  case PROJETOR:
+  case TOPICO_PROJETOR:
     verificarHandshakeProjetor(mensagem);
     break;
 
-  case TELA:
+  case TOPICO_TELA:
     verificarHandshakeTela(mensagem);
     break;
 
-  case TELEVISAO:
+  case TOPICO_TELEVISAO:
     verificarHandshakeTelevisao(mensagem);
     break;
 
-  case LAMPADAS:
+  case TOPICO_LAMPADAS:
     verificarHandshakeLampadas(mensagem);
     break;
 
-  case AR_CONDICIONADO:
+  case TOPICO_AR_CONDICIONADO:
     verificarHandshakeArCondicionado(mensagem);
     break;
 
-  case TEMPERATURA:
+  case TOPICO_TEMPERATURA:
     verificarHandshakeTemperatura(mensagem);
     break;
 
@@ -93,14 +93,14 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
   }
 }
 
-modulos identificarTopicos(const char *topico)
+Topicos identificarTopicos(const char *topico)
 {
   for (size_t i = 0; i < obterTotalTopicosRecebimento(); i++)
   {
     if (strcmp(topico, obterTopicoRecebimento(i)) == 0)
     {
-      return modulos(i);
+      return Topicos(i);
     }
   }
-  return MODULO_INVALIDO;
+  return TOPICO_INVALIDO;
 }
