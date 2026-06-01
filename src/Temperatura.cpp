@@ -51,6 +51,6 @@ void enviarComandoTemperatura()
 
     doc["temperatura"]["comando"] = enviarDados;
     serializeJson(doc, mensagem);
-    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+    publicarMensagemNoTopico(TEMPERATURA, mensagem.c_str());
     enviarDados = false;
 }

@@ -46,16 +46,21 @@ void verificarHandshakeLampadas(const String& mensagem)
 void processarComandoLampada(uint32_t estadoPowerLampada)
 {
     int8_t comandoLampada = -1;
-    if(estadoPowerLampada)
+
+    if(estadoPowerLampada == 0)
     {
-        comandoLampada = 0; //DESLIGAR
+        comandoLampada = DESLIGAR; 
     }
-    else
+    else if (estadoPowerLampada == 1)
     {
-        comandoLampada = 1; //LIGAR
+        comandoLampada = LIGAR; 
+    }
+    else 
+    {
+        debugErro("Comando não identificado");
     }
 
-    if (comandoLampada != -1)
+    if (comandoLampada == 0 || comandoLampada == 1)
     {
         enviarComandoLampada(comandoLampada);
         comandoLampada = -1;
@@ -69,5 +74,5 @@ void enviarComandoLampada(int8_t comandoLampada)
 
     doc["lampada"]["comando"] = comandoLampada;
     serializeJson(doc, mensagem);
-    publicarMensagemNoTopico(PROJETOR, mensagem.c_str());
+    publicarMensagemNoTopico(LAMPADAS, mensagem.c_str());
 }
