@@ -8,14 +8,8 @@ enum Topicos
   TOPICO_TELEVISAO,
   TOPICO_LAMPADAS,
   TOPICO_AR_CONDICIONADO,
-  TOPICO_TEMPERATURA,
+  TOPICO_SENSOR,
   TOPICO_INVALIDO
-};
-
-enum ComandosPower
-{
-  DESLIGAR,
-  LIGAR
 };
 
 enum ComandosTela
@@ -24,6 +18,5 @@ enum ComandosTela
   SUBIR,
   PARAR
 };
-
 
 #endif

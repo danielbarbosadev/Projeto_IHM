@@ -19,8 +19,16 @@ extern NexBotao BTN_MENU_PROJETOR;
 extern NexBotao BTN_MENU_TELA;
 extern NexBotao BTN_MENU_INICIAL;
 
+extern NexBotao BTN_MENU_INICIAL;
+extern NexBotao BTN_MENU_INICIAL;
+extern NexBotaoDuplo INTERRUPTOR_LAMPADA_1;
+extern NexBotaoDuplo INTERRUPTOR_LAMPADA_2;
+extern NexBotaoDuplo INTERRUPTOR_LAMPADA_3;
+extern NexBotaoDuplo INTERRUPTOR_LAMPADA_4;
+
 void configurarInicializacaoNextion();
 void loopNextion();
 void configurarEventosNextion();
+void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
 
 #endif

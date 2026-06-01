@@ -8,7 +8,6 @@
 #include "Enum.h"
 #include "Lampadas.h"
 
-
 void verificarHandshakeLampadas(const String& mensagem)
 {
     JsonDocument doc;
@@ -43,36 +42,12 @@ void verificarHandshakeLampadas(const String& mensagem)
     }
 }
 
-void processarComandoLampada(uint32_t estadoPowerLampada)
-{
-    int8_t comandoLampada = -1;
-
-    if(estadoPowerLampada == 0)
-    {
-        comandoLampada = DESLIGAR; 
-    }
-    else if (estadoPowerLampada == 1)
-    {
-        comandoLampada = LIGAR; 
-    }
-    else 
-    {
-        debugErro("Comando não identificado");
-    }
-
-    if (comandoLampada == 0 || comandoLampada == 1)
-    {
-        enviarComandoLampada(comandoLampada);
-        comandoLampada = -1;
-    }
-}
-
-void enviarComandoLampada(int8_t comandoLampada)
+void enviarComandoLampada(const char* lampada, uint32_t comandoLampada)
 {
     JsonDocument doc;
     String mensagem;
 
-    doc["lampada"]["comando"] = comandoLampada;
+    doc[lampada]["comando"] = comandoLampada;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_LAMPADAS, mensagem.c_str());
 }
