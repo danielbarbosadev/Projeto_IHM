@@ -15,7 +15,7 @@
 #include "Televisao.h"
 #include "Lampadas.h"
 #include "ArCondicionado.h"
-#include "Temperatura.h"
+#include "Sensor.h"
 #include "IHM.h"
 
 //* ======================
@@ -82,8 +82,8 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
     verificarHandshakeArCondicionado(mensagem);
     break;
 
-  case TOPICO_TEMPERATURA:
-    verificarHandshakeTemperatura(mensagem);
+  case TOPICO_SENSOR:
+    verificarHandshakeSensor(mensagem);
     break;
 
   default:
