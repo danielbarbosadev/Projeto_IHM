@@ -12,11 +12,18 @@ enum modulos
   MODULO_INVALIDO
 };
 
+enum ComandosPower
+{
+  DESLIGAR,
+  LIGAR
+};
+
 enum ComandosTela
 {
   DESCER,
   SUBIR,
   PARAR
 };
+
 
 #endif
