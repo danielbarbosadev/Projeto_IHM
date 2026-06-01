@@ -2,7 +2,6 @@
 //* BIBLIOTECAS
 //*=======================
 #include <Arduino.h>
-#include <ArduinoJson.h>
 
 //* ======================
 //* ARQUIVOS LOCAIS
@@ -41,7 +40,7 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
-  nexLoop();
+  loopNextion();
 }
 
 void tratarMensagemRecebida(const char *topico, const String &mensagem)
