@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <Nextion.h>
+#include <NextionUI.h>
 
 #include "IHM.h"
 #include "DebugManager.h"
@@ -10,35 +10,39 @@
 #include "ArCondicionado.h"
 #include "Temperatura.h"
 
-uint32_t NEXTION_BAUD_RATE = 9600;
-uint8_t NEXTION_PIN_TX = 17;
-uint8_t NEXTION_PIN_RX = 18;
+const uint32_t NEXTION_BAUD_RATE = 9600;
+const uint8_t NEXTION_PIN_TX = 17;
+const uint8_t NEXTION_PIN_RX = 18;
 
-NexButton BTN_MENU_TV(1, 1, "BotaoMenuTV");
-NexButton BTN_MENU_LAMPADA(1, 2, "BotaoMenuLPD");
-NexButton BTN_MENU_AC(1, 3, "BotaoMenuAC");
-NexButton BTN_MENU_TEMP(1, 4, "BotaoMenuTemp");
-NexButton BTN_MENU_PROJETOR(1, 5, "BotaoMenuPT");
-NexButton BTN_MENU_TELA(1, 6, "BotaoMenuTela");
-NexButton BTN_MENU_INICIAL(2, 1, "BotaoInicial");
+NexDisplay display;
+
+NexBotao BTN_MENU_TV(1, 1, "BotaoMenuTV");
+NexBotao BTN_MENU_LAMPADA(1, 2, "BotaoMenuLPD");
+NexBotao BTN_MENU_AC(1, 3, "BotaoMenuAC");
+NexBotao BTN_MENU_TEMP(1, 4, "BotaoMenuTemp");
+NexBotao BTN_MENU_PROJETOR(1, 5, "BotaoMenuPT");
+NexBotao BTN_MENU_TELA(1, 6, "BotaoMenuTela");
+NexBotao BTN_MENU_INICIAL(2, 1, "BotaoInicial");
 
 void configurarInicializacaoNextion()
 {
-    bool nextionInicializado = nexInit(NEXTION_BAUD_RATE, NEXTION_PIN_RX, NEXTION_PIN_TX);
-
-    if(!nextionInicializado)
+    if(!display.begin(Serial2, NEXTION_BAUD_RATE, NEXTION_PIN_RX, NEXTION_PIN_TX))
     {
         debugErro("O Nextion não confirmou a inicialização");
     }
     else
     {
-        debugInfo("Nextion Inicializado");
+        debugInfo("Inicializacão Nextion confirmada");
     }
+}
+
+void loopNextion()
+{
+    display.atualizar();
 }
 
 void configurarEventosNextion()
 {
-  BTN_MENU_TEMP.attachPop(enviarComandoTemperatura);
-
-  nexListen(BTN_MENU_TEMP);
+  display.escutar(BTN_MENU_TEMP);
+  BTN_MENU_TEMP.aoSoltar(enviarComandoTemperatura);
 }
