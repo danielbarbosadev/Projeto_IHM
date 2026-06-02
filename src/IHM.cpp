@@ -48,44 +48,52 @@ NexBotaoDuplo interruptorLampada2(3, 3, "interruptor2");
 NexBotaoDuplo interruptorLampada3(3, 4, "interruptor3");
 NexBotaoDuplo interruptorLampada4(3, 5, "interruptor4");
 
-//* BOTÕES TELA
-NexBotao btnMenuInicialTela(7, 1, "BotaoInicial");
-NexBotao DescerTela (7, 2, "telaDOWN");
-NexBotao SubirTela (7, 3, "telaUP");
-NexBotao TelaParar (7, 4, "telaFreeze");
-NexBotaoDuplo Tela1(7, 5, "tela_Esquerda");
-NexBotaoDuplo Tela2(7, 6, "tela_Direita");
-
 //* BOTÕES PROJETOR
 NexBotao BotaoInicialProjetor(4, 1, "BotaoInicial");
-NexBotaoDuplo PowerPT(4, 2, "PowerPT");
+NexBotaoDuplo PowerPT(4, 2, "powerPT");
 NexBotaoDuplo freezePT(4, 3, "freezePT");
 NexBotaoDuplo mutePT(4, 4, "mutePT");
-NexBotao PT_ZOOMIN(4, 5, "PT_ZOOMIN");
-NexBotao PT_ZOOMOUT(4, 6, "PT_ZOOMOUT");
+NexBotao PT_ZOOMOUT(4, 5, "PT_ZOOMOUT");
+NexBotao PT_ZOOMIN(4, 6, "PT_ZOOMIN");
 NexBotao volProjetorAumentar(4, 7, "volPT_DOWN");
 NexBotao volProjetorDiminuir(4, 8, "volPT_UP");
 NexBotao configAdicionais(4, 9, "moreConfigs");
 NexBotaoDuplo Projetor1(4, 10, "PT_esquerda");
 NexBotaoDuplo Projetor2(4, 11, "PT_direita");
 
-// BOTÕES AR-CONDICIONADO
-// NexBotao BotaoInicial(5, 1, "BotaoInicial");
-// NexBotaoDuplo PowerAC(5, 2, "PowerAC");
-// NexBotao AC_1(5, 3, "AC_1");
-// NexBotao AC_2(5, 4, "AC_2");
-// NexBotao AC_3(5, 5, "AC_3");
-// NexBotao AC_4(5, 6, "AC_4");
-// NexBotaoDuplo AC_autoMode(5, 7, "AC_autoMode");
-// NexBotaoDuplo AC_coolMode(5, 8, "AC_coolMode");
-// NexBotaoDuplo AC_fanMode(5, 9, "AC_fanMode");
-// NexBotaoDuplo AC_fanMEDIUM(5, 10, "AC_fanMEDIUM");
-// NexBotaoDuplo AC_fanLOW(5, 11, "AC_fanLOW");
-// NexBotaoDuplo AC_fanHIGH(5, 12, "AC_fanHIGH");
-// NexBotaoDuplo AC_fanQUIET(5, 13, "AC_fanQUIET");
-// NexTexto temp_AC(5, 14, "temp_AC");
-// NexBotao AC_temp_UP(5, 15, "AC_temp_UP");
-// NexBotao AC_temp_DOWN(5, 16, "AC_temp_DOWN");
+//* BOTÕES MORE CONFIGS PROJETOR
+NexBotao BotaoVoltarProjetor(5, 1, "MenuProjetor");
+
+//* BOTÕES AR-CONDICIONADO
+NexImagem PopUP(6, 1, "p0");
+NexBotao BotaoInicial(6, 2, "BotaoInicial");
+NexBotaoDuplo PowerAC(6, 3, "powerAC");
+NexBotao AC_1(6, 4, "AC_1");
+NexBotao AC_2(6, 5, "AC_2");
+NexBotao AC_3(6, 6, "AC_3");
+NexBotao AC_4(6, 7, "AC_4");
+NexBotaoDuplo AC_autoMode(6, 8, "AC_autoMode");
+NexBotaoDuplo AC_coolMode(6, 9, "AC_coolMode");
+NexBotaoDuplo AC_fanMode(6,10, "AC_fanMode");
+NexBotaoDuplo AC_fanMEDIUM(6, 11, "AC_fanMEDIUM");
+NexBotaoDuplo AC_fanLOW(6, 12, "AC_fanLOW");
+NexBotaoDuplo AC_fanHIGH(6, 13, "AC_fanHIGH");
+NexBotaoDuplo AC_fanQUIET(6, 14, "AC_fanQUIET");
+NexTexto temp_AC(6, 15, "t0");
+NexBotao AC_temp_UP(6, 16, "AC_temp_UP");
+NexBotao AC_temp_DOWN(6, 17, "AC_temp_DOWN");
+
+//* BOTÕES TEMPERATURA
+NexBotao BotaoInicialSensor(7, 1, "BotaoInicial");
+
+//* BOTÕES TELA
+NexBotao btnMenuInicialTela(8, 1, "BotaoInicial");
+NexBotao DescerTela (8, 2, "telaDOWN");
+NexBotao SubirTela (8, 3, "telaUP");
+NexBotao TelaParar (8, 4, "telaFreeze");
+NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
+NexBotaoDuplo Tela2(8, 6, "tela_Direita");
+NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
 
@@ -128,6 +136,9 @@ void configurarEventosNextion()
 
   display.escutar(Tela2);
   Tela2.aoSoltar([](){strcpy(telaEscolhida, "Tela_2");});
+
+  display.escutar(todasTelas);
+  todasTelas.aoSoltar([](){strcpy(telaEscolhida, "Telas");});
 
   display.escutar(SubirTela);
   SubirTela.aoSoltar([](){enviarComandoTela(SUBIR);});
