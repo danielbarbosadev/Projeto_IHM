@@ -8,7 +8,7 @@
 #include "Enum.h"
 #include "Tela.h"
 
-char telaAtual[] = "";
+char telaEscolhida[32] = "";
 
 void verificarHandshakeTela(const String& mensagem)
 {
@@ -44,12 +44,12 @@ void verificarHandshakeTela(const String& mensagem)
     }
 }
 
-void enviarComandoTela(uint8_t comandoTela)
+void enviarComandoTela(uint32_t comandoTela)
 {
     JsonDocument doc;
     String mensagem = "";
     
-    doc[telaAtual]["comando"] = comandoTela;
+    doc[telaEscolhida]["comando"] = comandoTela;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_TELA, mensagem.c_str());
 }
