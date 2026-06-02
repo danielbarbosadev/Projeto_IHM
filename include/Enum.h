@@ -19,4 +19,15 @@ enum ComandosTela
   PARAR
 };
 
+enum ComandosProjetor
+{
+  MENU,
+  ENTER,
+  ACIMA,
+  ABAIXAR,
+  RIGHT,
+  LEFT,
+  ESC
+};
+
 #endif
