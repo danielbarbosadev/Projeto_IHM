@@ -68,17 +68,17 @@ void configurarDebug()
 
     debugInfoSemLinha("\n\n\n\n\n\r");
     debugInfo("===================");
-    debugInfo(" ESP32 Iniciado");
-    debugInfo(" Sistema de debug ativo");
+    debugInfo(" ESP32 INICIADO");
+    debugInfo(" SISTEMA DE DEBUG ATIVO");
 
     if (nivelDebugAtual == DEBUG_TUDO)
     {
-        Serial.print("[INFO] Debug iniciado em modo completo");
+        Serial.println("[INFO] Debug iniciado em modo completo");
     }
     
     else if (nivelDebugAtual == DEBUG_ERRO)
     {
-         Serial.print("[INFO] Debug iniciado em apenas erros");
+         Serial.println("[INFO] Debug iniciado em apenas erros");
     }
     debugInfo("===================");
 }
