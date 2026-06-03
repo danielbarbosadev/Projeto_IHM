@@ -50,16 +50,16 @@ NexBotaoDuplo interruptorLampada4(3, 5, "interruptor4");
 
 //* BOTÕES PROJETOR
 NexBotao BotaoInicialProjetor(4, 1, "BotaoInicial");
-NexBotaoDuplo PowerPT(4, 2, "powerPT");
-NexBotaoDuplo freezePT(4, 3, "freezePT");
-NexBotaoDuplo mutePT(4, 4, "mutePT");
+NexBotaoDuplo powerProjetor(4, 2, "powerPT");
+NexBotaoDuplo congelarProjetor(4, 3, "freezePT");
+NexBotaoDuplo mudoProjetor(4, 4, "mutePT");
 NexBotao PT_ZOOMOUT(4, 5, "PT_ZOOMOUT");
 NexBotao PT_ZOOMIN(4, 6, "PT_ZOOMIN");
 NexBotao volProjetorAumentar(4, 7, "volPT_DOWN");
 NexBotao volProjetorDiminuir(4, 8, "volPT_UP");
 NexBotao configAdicionais(4, 9, "moreConfigs");
-NexBotaoDuplo Projetor1(4, 10, "PT_esquerda");
-NexBotaoDuplo Projetor2(4, 11, "PT_direita");
+NexBotaoDuplo projetor1(4, 10, "PT_esquerda");
+NexBotaoDuplo projetor2(4, 11, "PT_direita");
 
 //* BOTÕES MORE CONFIGS PROJETOR
 NexBotao BotaoVoltarProjetor(5, 1, "MenuProjetor");
@@ -130,6 +130,46 @@ void configurarEventosNextion()
 
   display.escutar(interruptorLampada4);
   interruptorLampada4.aoSoltar([](){processarLampada(interruptorLampada4, "Lampada_4");});
+
+  display.escutar(projetor1);
+  projetor1.aoSoltar([](){strcpy(projetorEscolhido, "Projetor_1");});
+
+  display.escutar(projetor2);
+  projetor2.aoSoltar([](){strcpy(projetorEscolhido, "Projetor_2");});
+
+  display.escutar(powerProjetor);
+  powerProjetor.aoSoltar([]()
+  {
+    uint32_t estadoPowerProjetor;
+    powerProjetor.get("val", estadoPowerProjetor);
+    enviarComandoProjetor(estadoPowerProjetor);
+  });
+
+  display.escutar(congelarProjetor);
+  congelarProjetor.aoSoltar([]()
+  {
+    uint32_t estadoFreezeProjetor;
+    congelarProjetor.get("val", estadoFreezeProjetor);
+    enviarComandoProjetor(estadoFreezeProjetor);
+  });
+
+  display.escutar(mudoProjetor);
+  mudoProjetor.aoSoltar([]()
+  {
+    uint32_t estadoMudoProjetor;
+    mudoProjetor.get("val", estadoMudoProjetor);
+    enviarComandoProjetor(estadoMudoProjetor);
+  });
+
+  display.escutar(configAdicionais);
+  configAdicionais.aoSoltar([](){enviarComandoProjetor(MENU);});
+
+  display.escutar(volProjetorAumentar);
+  volProjetorAumentar.aoSoltar([](){enviarComandoProjetor(AUMENTAR_VOLUME);});
+
+  display.escutar(volProjetorDiminuir);
+  volProjetorDiminuir.aoSoltar([](){enviarComandoProjetor(DIMINUIR_VOLUME);});
+
 
   display.escutar(Tela1);
   Tela1.aoSoltar([](){strcpy(telaEscolhida, "Tela_1");});
