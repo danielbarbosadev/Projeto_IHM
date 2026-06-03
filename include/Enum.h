@@ -21,6 +21,8 @@ enum ComandosTela
 
 enum ComandosProjetor
 {
+  DIMINUIR_VOLUME,
+  AUMENTAR_VOLUME,
   MENU,
   ENTER,
   ACIMA,
