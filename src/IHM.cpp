@@ -63,6 +63,12 @@ NexBotaoDuplo projetor2(4, 11, "PT_direita");
 
 //* BOTÕES MORE CONFIGS PROJETOR
 NexBotao BotaoVoltarProjetor(5, 1, "MenuProjetor");
+NexBotao setaEsquerda(5, 2, "setaESQ");
+NexBotao setaDireita(5, 3, "setaDIR");
+NexBotao setaBaixo(5, 4, "setaDOWN");
+NexBotao setaCima(5, 5, "setaUP");
+NexBotao botaoSelect(5, 6, "botaoSelect");
+NexBotao botaoEsc(5, 7, "botaoESC");
 
 //* BOTÕES AR-CONDICIONADO
 NexImagem PopUP(6, 1, "p0");
@@ -158,18 +164,30 @@ void configurarEventosNextion()
   {
     uint32_t estadoMudoProjetor;
     mudoProjetor.get("val", estadoMudoProjetor);
+    
     enviarComandoProjetor(estadoMudoProjetor);
   });
 
   display.escutar(configAdicionais);
-  configAdicionais.aoSoltar([](){enviarComandoProjetor(MENU);});
+  configAdicionais.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_MENU);});
 
   display.escutar(volProjetorAumentar);
-  volProjetorAumentar.aoSoltar([](){enviarComandoProjetor(AUMENTAR_VOLUME);});
+  volProjetorAumentar.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_VOL_UP);});
 
   display.escutar(volProjetorDiminuir);
-  volProjetorDiminuir.aoSoltar([](){enviarComandoProjetor(DIMINUIR_VOLUME);});
+  volProjetorDiminuir.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_VOL_DOWN);});
 
+  display.escutar(setaCima);
+  setaCima.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_UP);});
+
+  display.escutar(setaBaixo);
+  setaBaixo.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_DOWN);});
+
+  display.escutar(setaDireita);
+  setaDireita.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_RIGHT);});
+
+  display.escutar(setaEsquerda);
+  setaEsquerda.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_LEFT);});
 
   display.escutar(Tela1);
   Tela1.aoSoltar([](){strcpy(telaEscolhida, "Tela_1");});
