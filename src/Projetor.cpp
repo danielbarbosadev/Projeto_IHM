@@ -8,6 +8,8 @@
 #include "Enum.h"
 #include "Projetor.h"
 
+char projetorEscolhido[32] = "";
+
 void verificarHandshakeProjetor(const String& mensagem)
 {
     JsonDocument doc;
@@ -42,31 +44,12 @@ void verificarHandshakeProjetor(const String& mensagem)
     }
 }
 
-void enviarComandoProjetor(uint8_t comandoProjetor)
+void enviarComandoProjetor(uint32_t comandoProjetor)
 {
     JsonDocument doc;
     String mensagem = "";
 
-    doc["projetor"]["comando"] = comandoProjetor;
+    doc[projetorEscolhido]["comando"] = comandoProjetor;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_PROJETOR, mensagem.c_str());
-}
-
-void processarComandoProjetor(uint32_t estadoPowerProjetor)
-{
-    int8_t comandoProjetor = -1;
-    if(estadoPowerProjetor)
-    {
-        comandoProjetor = 0; //DESLIGAR
-    }
-    else
-    {
-        comandoProjetor = 1; //LIGAR
-    }
-
-    if (comandoProjetor != -1)
-    {
-        enviarComandoProjetor(comandoProjetor);
-        comandoProjetor = -1;
-    }
 }

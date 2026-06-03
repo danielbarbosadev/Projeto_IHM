@@ -1,10 +1,9 @@
 #ifndef PROJETOR_H
 #define PROJETOR_H
 
-extern const char *comandoProjetor;
+extern char projetorEscolhido[32];
 
 void verificarHandshakeProjetor(const String& mensagem);
-void enviarComandoProjetor(uint8_t comandoProjetor);
-void processarComandoProjetor(uint32_t estadoPowerProjetor);
+void enviarComandoProjetor(uint32_t comandoProjetor);
 
 #endif
