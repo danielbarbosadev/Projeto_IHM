@@ -72,13 +72,13 @@ extern NexBotao AC_temp_DOWN;
 
 extern NexBotao BotaoInicialSensor;
 
-NexBotao btnMenuInicialTela;
-NexBotao DescerTela;
-NexBotao SubirTela;
-NexBotao TelaParar;
-NexBotaoDuplo Tela1;
-NexBotaoDuplo Tela2;
-NexBotaoDuplo todasTelas;
+extern NexBotao btnMenuInicialTela;
+extern NexBotao DescerTela;
+extern NexBotao SubirTela;
+extern NexBotao TelaParar;
+extern NexBotaoDuplo Tela1;
+extern NexBotaoDuplo Tela2;
+extern NexBotaoDuplo todasTelas;
 
 void configurarInicializacaoNextion();
 void loopNextion();
