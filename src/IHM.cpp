@@ -144,29 +144,13 @@ void configurarEventosNextion()
   projetor2.aoSoltar([](){strcpy(projetorEscolhido, "Projetor_2");});
 
   display.escutar(powerProjetor);
-  powerProjetor.aoSoltar([]()
-  {
-    uint32_t estadoPowerProjetor;
-    powerProjetor.get("val", estadoPowerProjetor);
-    enviarComandoProjetor(estadoPowerProjetor);
-  });
+  powerProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_POWER);});
 
   display.escutar(congelarProjetor);
-  congelarProjetor.aoSoltar([]()
-  {
-    uint32_t estadoFreezeProjetor;
-    congelarProjetor.get("val", estadoFreezeProjetor);
-    enviarComandoProjetor(estadoFreezeProjetor);
-  });
+  congelarProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_FREEZE);});
 
   display.escutar(mudoProjetor);
-  mudoProjetor.aoSoltar([]()
-  {
-    uint32_t estadoMudoProjetor;
-    mudoProjetor.get("val", estadoMudoProjetor);
-    
-    enviarComandoProjetor(estadoMudoProjetor);
-  });
+  mudoProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_MUTE);});
 
   display.escutar(configAdicionais);
   configAdicionais.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_MENU);});
@@ -189,6 +173,12 @@ void configurarEventosNextion()
   display.escutar(setaEsquerda);
   setaEsquerda.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_LEFT);});
 
+  display.escutar(botaoSelect);
+  botaoSelect.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_ENTER);});
+
+  display.escutar(botaoEsc);
+  botaoEsc.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_ESC);});
+
   display.escutar(Tela1);
   Tela1.aoSoltar([](){strcpy(telaEscolhida, "Tela_1");});
 
@@ -210,9 +200,9 @@ void configurarEventosNextion()
 
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada)
 {
-    uint32_t estadoLampada;
+  uint32_t estadoLampada;
 
-    interruptor.get("val", estadoLampada);
+  interruptor.get("val", estadoLampada);
 
-    enviarComandoLampada(nomeLampada, estadoLampada);
+  enviarComandoLampada(nomeLampada, estadoLampada);
 }
