@@ -126,22 +126,22 @@ void configurarEventosNextion()
   btnMenuSensor.aoSoltar(enviarComandoSensor);
 
   display.escutar(interruptorLampada1);
-  interruptorLampada1.aoSoltar([](){processarLampada(interruptorLampada1, "Lampada_1");});
+  interruptorLampada1.aoSoltar([](){processarLampada(interruptorLampada1, "lampada_1");});
 
   display.escutar(interruptorLampada2);
-  interruptorLampada2.aoSoltar([](){processarLampada(interruptorLampada2, "Lampada_2");});
+  interruptorLampada2.aoSoltar([](){processarLampada(interruptorLampada2, "lampada_2");});
 
   display.escutar(interruptorLampada3);
-  interruptorLampada3.aoSoltar([](){processarLampada(interruptorLampada3, "Lampada_3");});
+  interruptorLampada3.aoSoltar([](){processarLampada(interruptorLampada3, "lampada_3");});
 
   display.escutar(interruptorLampada4);
-  interruptorLampada4.aoSoltar([](){processarLampada(interruptorLampada4, "Lampada_4");});
+  interruptorLampada4.aoSoltar([](){processarLampada(interruptorLampada4, "lampada_4");});
 
   display.escutar(projetor1);
-  projetor1.aoSoltar([](){strcpy(projetorEscolhido, "Projetor_1");});
+  projetor1.aoSoltar([](){strcpy(projetorEscolhido, "projetor_1");});
 
   display.escutar(projetor2);
-  projetor2.aoSoltar([](){strcpy(projetorEscolhido, "Projetor_2");});
+  projetor2.aoSoltar([](){strcpy(projetorEscolhido, "projetor_2");});
 
   display.escutar(powerProjetor);
   powerProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_POWER);});
@@ -180,13 +180,13 @@ void configurarEventosNextion()
   botaoEsc.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_ESC);});
 
   display.escutar(Tela1);
-  Tela1.aoSoltar([](){strcpy(telaEscolhida, "Tela_1");});
+  Tela1.aoSoltar([](){strcpy(telaEscolhida, "tela_1");});
 
   display.escutar(Tela2);
-  Tela2.aoSoltar([](){strcpy(telaEscolhida, "Tela_2");});
+  Tela2.aoSoltar([](){strcpy(telaEscolhida, "tela_2");});
 
   display.escutar(todasTelas);
-  todasTelas.aoSoltar([](){strcpy(telaEscolhida, "Telas");});
+  todasTelas.aoSoltar([](){strcpy(telaEscolhida, "telas");});
 
   display.escutar(SubirTela);
   SubirTela.aoSoltar([](){enviarComandoTela(TELA_UP);});
