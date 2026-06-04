@@ -189,13 +189,13 @@ void configurarEventosNextion()
   todasTelas.aoSoltar([](){strcpy(telaEscolhida, "Telas");});
 
   display.escutar(SubirTela);
-  SubirTela.aoSoltar([](){enviarComandoTela(SUBIR);});
+  SubirTela.aoSoltar([](){enviarComandoTela(TELA_UP);});
 
   display.escutar(DescerTela);
-  DescerTela.aoSoltar([](){enviarComandoTela(DESCER);});
+  DescerTela.aoSoltar([](){enviarComandoTela(TELA_DOWN);});
 
   display.escutar(TelaParar);
-  TelaParar.aoSoltar([](){enviarComandoTela(PARAR);});
+  TelaParar.aoSoltar([](){enviarComandoTela(TELA_STOP);});
 }
 
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada)
