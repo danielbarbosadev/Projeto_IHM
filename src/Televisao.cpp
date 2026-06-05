@@ -41,3 +41,12 @@ void verificarHandshakeTelevisao(const String& mensagem)
         }
     }
 }
+void enviarComandotelevisao(const char* Televisao, uint32_t comandoTelevisao)
+{
+    JsonDocument doc;
+    String mensagem = "";
+
+    doc[Televisao]["comando"] = comandoTelevisao;
+    serializeJson(doc, mensagem);
+    publicarMensagemNoTopico(TOPICO_TELEVISAO, mensagem.c_str());
+}

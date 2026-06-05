@@ -196,6 +196,7 @@ void configurarEventosNextion()
 
   display.escutar(TelaParar);
   TelaParar.aoSoltar([](){enviarComandoTela(TELA_STOP);});
+
 }
 
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada)

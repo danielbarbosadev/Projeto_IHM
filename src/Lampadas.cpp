@@ -47,7 +47,7 @@ void enviarComandoLampada(const char* lampada, uint32_t comandoLampada)
     JsonDocument doc;
     String mensagem;
 
-    doc[lampada]["comando"] = comandoLampada;
+    doc[lampada] = (bool)comandoLampada;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_LAMPADAS, mensagem.c_str());
 }
