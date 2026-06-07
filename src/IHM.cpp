@@ -50,16 +50,17 @@ NexBotaoDuplo interruptorLampada4(3, 5, "interruptor4");
 
 //* BOTÕES PROJETOR
 NexBotao BotaoInicialProjetor(4, 1, "BotaoInicial");
-NexBotaoDuplo powerProjetor(4, 2, "powerPT");
-NexBotaoDuplo congelarProjetor(4, 3, "freezePT");
-NexBotaoDuplo mudoProjetor(4, 4, "mutePT");
-NexBotao PT_ZOOMOUT(4, 5, "PT_ZOOMOUT");
-NexBotao PT_ZOOMIN(4, 6, "PT_ZOOMIN");
-NexBotao volProjetorAumentar(4, 7, "volPT_DOWN");
-NexBotao volProjetorDiminuir(4, 8, "volPT_UP");
-NexBotao configAdicionais(4, 9, "moreConfigs");
-NexBotaoDuplo projetor1(4, 10, "PT_esquerda");
-NexBotaoDuplo projetor2(4, 11, "PT_direita");
+NexBotaoDuplo congelarProjetor(4, 2, "freezePT");
+NexBotaoDuplo mudoProjetor(4, 3, "mutePT");
+NexBotao PT_ZOOMOUT(4, 4, "PT_ZOOMOUT");
+NexBotao PT_ZOOMIN(4, 5, "PT_ZOOMIN");
+NexBotao volProjetorAumentar(4, 6, "volPT_DOWN");
+NexBotao volProjetorDiminuir(4, 7, "volPT_UP");
+NexBotao configAdicionais(4, 8, "moreConfigs");
+NexBotaoDuplo projetor1(4, 9, "PT_esquerda");
+NexBotaoDuplo projetor2(4, 10, "PT_direita");
+NexBotaoDuplo ambosprojetores(4, 11, "PT_ambos");
+NexBotao powerProjetor(4, 12, "powerPT");
 
 //* BOTÕES MORE CONFIGS PROJETOR
 NexBotao BotaoVoltarProjetor(5, 1, "MenuProjetor");
@@ -73,21 +74,22 @@ NexBotao botaoEsc(5, 7, "botaoESC");
 //* BOTÕES AR-CONDICIONADO
 NexImagem PopUP(6, 1, "p0");
 NexBotao BotaoInicial(6, 2, "BotaoInicial");
-NexBotaoDuplo PowerAC(6, 3, "powerAC");
-NexBotao AC_1(6, 4, "AC_1");
-NexBotao AC_2(6, 5, "AC_2");
-NexBotao AC_3(6, 6, "AC_3");
-NexBotao AC_4(6, 7, "AC_4");
-NexBotaoDuplo AC_autoMode(6, 8, "AC_autoMode");
-NexBotaoDuplo AC_coolMode(6, 9, "AC_coolMode");
-NexBotaoDuplo AC_fanMode(6,10, "AC_fanMode");
-NexBotaoDuplo AC_fanMEDIUM(6, 11, "AC_fanMEDIUM");
-NexBotaoDuplo AC_fanLOW(6, 12, "AC_fanLOW");
-NexBotaoDuplo AC_fanHIGH(6, 13, "AC_fanHIGH");
-NexBotaoDuplo AC_fanQUIET(6, 14, "AC_fanQUIET");
-NexTexto temp_AC(6, 15, "t0");
-NexBotao AC_temp_UP(6, 16, "AC_temp_UP");
-NexBotao AC_temp_DOWN(6, 17, "AC_temp_DOWN");
+NexBotaoDuplo AC_1(6, 3, "AC_1");
+NexBotaoDuplo AC_2(6, 4, "AC_2");
+NexBotaoDuplo AC_3(6, 5, "AC_3");
+NexBotaoDuplo AC_4(6, 6, "AC_4");
+NexBotaoDuplo AC_autoMode(6, 7, "AC_autoMode");
+NexBotaoDuplo AC_coolMode(6, 8, "AC_coolMode");
+NexBotaoDuplo AC_fanMode(6,9, "AC_fanMode");
+NexBotaoDuplo AC_fanMEDIUM(6, 10, "AC_fanMEDIUM");
+NexBotaoDuplo AC_fanLOW(6, 11, "AC_fanLOW");
+NexBotaoDuplo AC_fanHIGH(6, 12, "AC_fanHIGH");
+NexBotaoDuplo AC_fanQUIET(6, 13, "AC_fanQUIET");
+NexTexto temp_AC(6, 14, "t0");
+NexBotao AC_temp_UP(6, 15, "AC_temp_UP");
+NexBotao AC_temp_DOWN(6, 16, "AC_temp_DOWN");
+NexBotaoDuplo AC_ALL(6, 17, "AC_ALL");
+NexBotao PowerAC(6, 18, "powerAC");
 
 //* BOTÕES TEMPERATURA
 NexBotao BotaoInicialSensor(7, 1, "BotaoInicial");
@@ -197,6 +199,20 @@ void configurarEventosNextion()
   display.escutar(TelaParar);
   TelaParar.aoSoltar([](){enviarComandoTela(TELA_STOP);});
 
+  display.escutar(PowerTV);
+  PowerTV.aoSoltar([](){enviarComandotelevisao(TV_POWER);});
+
+  display.escutar(HDMITV);
+  HDMITV.aoSoltar([](){enviarComandotelevisao(TV_HDMI);});
+
+  display.escutar(volTV_UP);
+  volTV_UP.aoSoltar([](){enviarComandotelevisao(TV_VOL_UP);});
+
+  display.escutar(volTV_DOWN);
+  volTV_DOWN.aoSoltar([](){enviarComandotelevisao(TV_VOL_DOWN);});
+  
+  display.escutar(muteTV);
+  muteTV.aoSoltar([](){enviarComandotelevisao(TV_MUTE);});
 }
 
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada)
