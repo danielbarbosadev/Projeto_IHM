@@ -69,6 +69,7 @@ enum comandosProjetor
 enum ComandosTV
 {
   TV_POWER,
+  TV_HDMI,
   TV_VOL_UP,
   TV_VOL_DOWN,
   TV_MUTE
