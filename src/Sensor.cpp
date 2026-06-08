@@ -49,7 +49,7 @@ void enviarComandoSensor()
     JsonDocument doc;
     String mensagem;
 
-    doc["Sensor"]["comando"] = enviarDados;
+    doc["sensor"]["comando"] = enviarDados;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_SENSOR, mensagem.c_str());
     enviarDados = false;
