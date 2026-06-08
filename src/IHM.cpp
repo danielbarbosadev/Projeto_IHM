@@ -63,7 +63,7 @@ NexBotaoDuplo ambosProjetores(4, 11, "PT_ambos");
 NexBotao powerProjetor(4, 12, "powerPT");
 
 //* BOTÕES MORE CONFIGS PROJETOR
-NexBotao BotaoVoltarProjetor(5, 1, "MenuProjetor");
+NexBotao botaoVoltarProjetor(5, 1, "MenuProjetor");
 NexBotao setaEsquerda(5, 2, "setaESQ");
 NexBotao setaDireita(5, 3, "setaDIR");
 NexBotao setaBaixo(5, 4, "setaDOWN");
@@ -73,7 +73,7 @@ NexBotao botaoEsc(5, 7, "botaoESC");
 
 //* BOTÕES AR-CONDICIONADO
 NexImagem PopUP(6, 1, "p0");
-NexBotao BotaoInicial(6, 2, "BotaoInicial");
+NexBotao BotaoInicialAC(6, 2, "BotaoInicial");
 NexBotaoDuplo AC_1(6, 3, "AC_1");
 NexBotaoDuplo AC_2(6, 4, "AC_2");
 NexBotaoDuplo AC_3(6, 5, "AC_3");
@@ -171,6 +171,10 @@ void configurarEventosNextion()
     configAdicionais.aoSoltar([]()
                               { enviarComandoProjetor(EPSON_CMD_MENU); });
 
+    display.escutar(botaoVoltarProjetor);
+    botaoVoltarProjetor.aoSoltar([]()
+                                { enviarComandoProjetor(EPSON_CMD_MENU); });
+
     display.escutar(volProjetorAumentar);
     volProjetorAumentar.aoSoltar([]()
                                  { enviarComandoProjetor(EPSON_CMD_VOL_UP); });
@@ -235,8 +239,8 @@ void configurarEventosNextion()
     HDMITV.aoSoltar([]()
     { 
         static uint8_t portaHDMI = 6;
-        if(portaHDMI > 9) portaHDMI = 6;
         portaHDMI++;
+        if(portaHDMI > 9) portaHDMI = 6;
         enviarComandotelevisao(portaHDMI); 
     });
 
@@ -272,8 +276,34 @@ void configurarEventosNextion()
     AC_ALL.aoSoltar([]()
                     { strcpy(AC_Escolhido, "AC"); });
 
-    
-    
+    display.escutar(AC_autoMode);
+    AC_autoMode.aoSoltar([]()
+                    { enviarComandoAC(AC_AUTO_MODE); });
+
+    display.escutar(AC_coolMode);
+    AC_coolMode.aoSoltar([]()
+                    { enviarComandoAC(AC_COOL_MODE); });
+                
+    display.escutar(AC_fanMode);
+    AC_fanMode.aoSoltar([]()
+                    { enviarComandoAC(AC_FAN_MODE); });
+
+    display.escutar(AC_fanLOW);
+    AC_fanLOW.aoSoltar([]()
+                    { enviarComandoAC(AC_FAN_LOW); });
+
+    display.escutar(AC_fanMEDIUM);
+    AC_fanMEDIUM.aoSoltar([]()
+                    { enviarComandoAC(AC_FAN_MEDIUM); });
+
+    display.escutar(AC_fanHIGH);
+    AC_fanHIGH.aoSoltar([]()
+                    { enviarComandoAC(AC_FAN_HIGH); });
+
+    display.escutar(AC_fanQUIET);
+    AC_fanQUIET.aoSoltar([]()
+                    { enviarComandoAC(AC_FAN_QUIET); });
+
 }
 
 void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)
