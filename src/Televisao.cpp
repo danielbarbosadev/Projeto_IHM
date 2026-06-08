@@ -46,7 +46,7 @@ void enviarComandotelevisao(uint32_t comandoTelevisao)
     JsonDocument doc;
     String mensagem = "";
 
-    doc["tv"] = comandoTelevisao;
+    doc["tv"]["comando"] = comandoTelevisao;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_TELEVISAO, mensagem.c_str());
 }
