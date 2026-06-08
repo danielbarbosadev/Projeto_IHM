@@ -103,7 +103,7 @@ NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
-void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada, const uint8_t numLampada);
+void processarLampada(const uint8_t numLampada);
 
 void configurarInicializacaoNextion()
 {
