@@ -68,11 +68,19 @@ enum comandosProjetor
 
 enum ComandosTV
 {
-  TV_POWER,
-  TV_HDMI,
+  TV_POWER = 1,
   TV_VOL_UP,
   TV_VOL_DOWN,
-  TV_MUTE
+  TV_SELECT,
+  TV_MUTE,
+  TV_HDMI_1,
+  TV_HDMI_2,
+  TV_HDMI_3,
+  TV_HDMI_4,
+  TV_UP,
+  TV_DOWN,
+  TV_LEFT,
+  TV_RIGHT
 };
 
 #endif
