@@ -85,6 +85,6 @@ extern NexBotaoDuplo todasTelas;
 void configurarInicializacaoNextion();
 void loopNextion();
 void configurarEventosNextion();
-void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
+void processarLampada(const uint8_t numLampada);
 
 #endif

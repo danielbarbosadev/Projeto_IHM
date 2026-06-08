@@ -103,7 +103,7 @@ NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
-void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada);
+void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada, const uint8_t numLampada);
 
 void configurarInicializacaoNextion()
 {
@@ -129,19 +129,31 @@ void configurarEventosNextion()
 
     display.escutar(interruptorLampada1);
     interruptorLampada1.aoSoltar([]()
-                                 { processarLampada(interruptorLampada1, "lampada_1"); });
+                                 { 
+                                    strcpy(lampadaEscolhida, "lampada_1");
+                                    processarLampada(1); 
+                                 });
 
     display.escutar(interruptorLampada2);
     interruptorLampada2.aoSoltar([]()
-                                 { processarLampada(interruptorLampada2, "lampada_2"); });
+                                 { 
+                                    strcpy(lampadaEscolhida, "lampada_2");
+                                    processarLampada(2); 
+                                 });
 
     display.escutar(interruptorLampada3);
     interruptorLampada3.aoSoltar([]()
-                                 { processarLampada(interruptorLampada3, "lampada_3"); });
+                                 { 
+                                    strcpy(lampadaEscolhida, "lampada_3");
+                                    processarLampada(3); 
+                                 });
 
     display.escutar(interruptorLampada4);
     interruptorLampada4.aoSoltar([]()
-                                 { processarLampada(interruptorLampada4, "lampada_4"); });
+                                 { 
+                                    strcpy(lampadaEscolhida, "lampada_4");
+                                    processarLampada(4); 
+                                 });
 
     display.escutar(projetor1);
     projetor1.aoSoltar([]()
@@ -306,11 +318,11 @@ void configurarEventosNextion()
 
 }
 
-void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)
+void processarLampada(const uint8_t numLampada)
 {
-    uint32_t estadoLampada;
+    bool estadoLampada;
 
-    interruptor.get("val", estadoLampada);
-
-    enviarComandoLampada(nomeLampada, estadoLampada);
+    estadoLampada = !estadoLampada;
+    guardarEstadoLampada(numLampada, estadoLampada);
+    enviarComandoLampada(estadoLampada);
 }
