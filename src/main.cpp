@@ -3,6 +3,7 @@
 //*=======================
 #include <Arduino.h>
 
+
 //* ======================
 //* ARQUIVOS LOCAIS
 //*=======================
@@ -23,6 +24,9 @@
 //*=======================
 Topicos identificarTopicos(const char *topico);
 void tratarMensagemRecebida(const char *, const String &);
+void restaurarConfiguracoesModulos();
+
+
 
 void setup()
 {
@@ -33,6 +37,7 @@ void setup()
   configurarMQTT();
   registrarCallbackMensagem(tratarMensagemRecebida);
   conectarMQTT();
+  restaurarConfiguracoesModulos();
 }
 
 void loop()
@@ -103,4 +108,12 @@ Topicos identificarTopicos(const char *topico)
     }
   }
   return TOPICO_INVALIDO;
+}
+
+void restaurarConfiguracoesModulos()
+{
+  for(size_t i = 1; i <= 4; i++)
+  {
+    enviarComandoLampada(carregarEstadoLampada(i));
+  }
 }
