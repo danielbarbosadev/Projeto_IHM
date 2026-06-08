@@ -43,3 +43,13 @@ void verificarHandshakeArCondicionado(const String& mensagem)
         }
     }
 }
+
+void enviarComandoAC(uint32_t comandoAC)
+{
+    JsonDocument doc;
+    String mensagem = "";
+
+    doc[AC_Escolhido]["comando"] = comandoAC;
+    serializeJson(doc, mensagem);
+    publicarMensagemNoTopico(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
