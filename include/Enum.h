@@ -83,4 +83,17 @@ enum ComandosTV
   TV_RIGHT
 };
 
+enum ComandosAC
+{
+  AC_AUTO_MODE,
+  AC_COOL_MODE,
+  AC_FAN_MODE,
+  AC_FAN_LOW,
+  AC_FAN_MEDIUM,
+  AC_FAN_HIGH,
+  AC_FAN_QUIET,
+  AC_TEMP_DOWN,
+  AC_TEMP_UP
+};
+
 #endif
