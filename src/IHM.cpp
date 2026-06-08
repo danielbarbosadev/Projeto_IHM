@@ -59,7 +59,7 @@ NexBotao volProjetorDiminuir(4, 7, "volPT_UP");
 NexBotao configAdicionais(4, 8, "moreConfigs");
 NexBotaoDuplo projetor1(4, 9, "PT_esquerda");
 NexBotaoDuplo projetor2(4, 10, "PT_direita");
-NexBotaoDuplo ambosprojetores(4, 11, "PT_ambos");
+NexBotaoDuplo ambosProjetores(4, 11, "PT_ambos");
 NexBotao powerProjetor(4, 12, "powerPT");
 
 //* BOTÕES MORE CONFIGS PROJETOR
@@ -80,14 +80,14 @@ NexBotaoDuplo AC_3(6, 5, "AC_3");
 NexBotaoDuplo AC_4(6, 6, "AC_4");
 NexBotaoDuplo AC_autoMode(6, 7, "AC_autoMode");
 NexBotaoDuplo AC_coolMode(6, 8, "AC_coolMode");
-NexBotaoDuplo AC_fanMode(6,9, "AC_fanMode");
+NexBotaoDuplo AC_fanMode(6, 9, "AC_fanMode");
 NexBotaoDuplo AC_fanMEDIUM(6, 10, "AC_fanMEDIUM");
 NexBotaoDuplo AC_fanLOW(6, 11, "AC_fanLOW");
 NexBotaoDuplo AC_fanHIGH(6, 12, "AC_fanHIGH");
 NexBotaoDuplo AC_fanQUIET(6, 13, "AC_fanQUIET");
 NexTexto temp_AC(6, 14, "t0");
-NexBotao AC_temp_UP(6, 15, "AC_temp_UP");
-NexBotao AC_temp_DOWN(6, 16, "AC_temp_DOWN");
+NexBotao AC_temp_DOWN(6, 15, "AC_temp_UP");
+NexBotao AC_temp_UP(6, 16, "AC_temp_DOWN");
 NexBotaoDuplo AC_ALL(6, 17, "AC_ALL");
 NexBotao PowerAC(6, 18, "powerAC");
 
@@ -96,18 +96,18 @@ NexBotao BotaoInicialSensor(7, 1, "BotaoInicial");
 
 //* BOTÕES TELA
 NexBotao btnMenuInicialTela(8, 1, "BotaoInicial");
-NexBotao DescerTela (8, 2, "telaDOWN");
-NexBotao SubirTela (8, 3, "telaUP");
-NexBotao TelaParar (8, 4, "telaFreeze");
+NexBotao DescerTela(8, 2, "telaDOWN");
+NexBotao SubirTela(8, 3, "telaUP");
+NexBotao TelaParar(8, 4, "telaFreeze");
 NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
-void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
+void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada);
 
 void configurarInicializacaoNextion()
 {
-    if(!display.begin(Serial2, NEXTION_BAUD_RATE, NEXTION_PIN_RX, NEXTION_PIN_TX))
+    if (!display.begin(Serial2, NEXTION_BAUD_RATE, NEXTION_PIN_RX, NEXTION_PIN_TX))
     {
         debugErro("O Nextion não confirmou a inicialização");
     }
@@ -124,102 +124,163 @@ void loopNextion()
 
 void configurarEventosNextion()
 {
-  display.escutar(btnMenuSensor);
-  btnMenuSensor.aoSoltar(enviarComandoSensor);
+    display.escutar(btnMenuSensor);
+    btnMenuSensor.aoSoltar(enviarComandoSensor);
 
-  display.escutar(interruptorLampada1);
-  interruptorLampada1.aoSoltar([](){processarLampada(interruptorLampada1, "lampada_1");});
+    display.escutar(interruptorLampada1);
+    interruptorLampada1.aoSoltar([]()
+                                 { processarLampada(interruptorLampada1, "lampada_1"); });
 
-  display.escutar(interruptorLampada2);
-  interruptorLampada2.aoSoltar([](){processarLampada(interruptorLampada2, "lampada_2");});
+    display.escutar(interruptorLampada2);
+    interruptorLampada2.aoSoltar([]()
+                                 { processarLampada(interruptorLampada2, "lampada_2"); });
 
-  display.escutar(interruptorLampada3);
-  interruptorLampada3.aoSoltar([](){processarLampada(interruptorLampada3, "lampada_3");});
+    display.escutar(interruptorLampada3);
+    interruptorLampada3.aoSoltar([]()
+                                 { processarLampada(interruptorLampada3, "lampada_3"); });
 
-  display.escutar(interruptorLampada4);
-  interruptorLampada4.aoSoltar([](){processarLampada(interruptorLampada4, "lampada_4");});
+    display.escutar(interruptorLampada4);
+    interruptorLampada4.aoSoltar([]()
+                                 { processarLampada(interruptorLampada4, "lampada_4"); });
 
-  display.escutar(projetor1);
-  projetor1.aoSoltar([](){strcpy(projetorEscolhido, "projetor_1");});
+    display.escutar(projetor1);
+    projetor1.aoSoltar([]()
+                       { strcpy(projetorEscolhido, "projetor_1"); });
 
-  display.escutar(projetor2);
-  projetor2.aoSoltar([](){strcpy(projetorEscolhido, "projetor_2");});
+    display.escutar(projetor2);
+    projetor2.aoSoltar([]()
+                       { strcpy(projetorEscolhido, "projetor_2"); });
 
-  display.escutar(powerProjetor);
-  powerProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_POWER);});
+    display.escutar(ambosProjetores);
+    ambosProjetores.aoSoltar([]()
+                    {strcpy(projetorEscolhido, "projetor"); });
 
-  display.escutar(congelarProjetor);
-  congelarProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_FREEZE);});
+    display.escutar(powerProjetor);
+    powerProjetor.aoSoltar([]()
+                           { enviarComandoProjetor(EPSON_CMD_POWER); });
 
-  display.escutar(mudoProjetor);
-  mudoProjetor.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_MUTE);});
+    display.escutar(congelarProjetor);
+    congelarProjetor.aoSoltar([]()
+                              { enviarComandoProjetor(EPSON_CMD_FREEZE); });
 
-  display.escutar(configAdicionais);
-  configAdicionais.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_MENU);});
+    display.escutar(mudoProjetor);
+    mudoProjetor.aoSoltar([]()
+                          { enviarComandoProjetor(EPSON_CMD_MUTE); });
 
-  display.escutar(volProjetorAumentar);
-  volProjetorAumentar.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_VOL_UP);});
+    display.escutar(configAdicionais);
+    configAdicionais.aoSoltar([]()
+                              { enviarComandoProjetor(EPSON_CMD_MENU); });
 
-  display.escutar(volProjetorDiminuir);
-  volProjetorDiminuir.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_VOL_DOWN);});
+    display.escutar(volProjetorAumentar);
+    volProjetorAumentar.aoSoltar([]()
+                                 { enviarComandoProjetor(EPSON_CMD_VOL_UP); });
 
-  display.escutar(setaCima);
-  setaCima.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_UP);});
+    display.escutar(volProjetorDiminuir);
+    volProjetorDiminuir.aoSoltar([]()
+                                 { enviarComandoProjetor(EPSON_CMD_VOL_DOWN); });
 
-  display.escutar(setaBaixo);
-  setaBaixo.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_DOWN);});
+    display.escutar(setaCima);
+    setaCima.aoSoltar([]()
+                      { enviarComandoProjetor(EPSON_CMD_UP); });
 
-  display.escutar(setaDireita);
-  setaDireita.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_RIGHT);});
+    display.escutar(setaBaixo);
+    setaBaixo.aoSoltar([]()
+                       { enviarComandoProjetor(EPSON_CMD_DOWN); });
 
-  display.escutar(setaEsquerda);
-  setaEsquerda.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_LEFT);});
+    display.escutar(setaDireita);
+    setaDireita.aoSoltar([]()
+                         { enviarComandoProjetor(EPSON_CMD_RIGHT); });
 
-  display.escutar(botaoSelect);
-  botaoSelect.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_ENTER);});
+    display.escutar(setaEsquerda);
+    setaEsquerda.aoSoltar([]()
+                          { enviarComandoProjetor(EPSON_CMD_LEFT); });
 
-  display.escutar(botaoEsc);
-  botaoEsc.aoSoltar([](){enviarComandoProjetor(EPSON_CMD_ESC);});
+    display.escutar(botaoSelect);
+    botaoSelect.aoSoltar([]()
+                         { enviarComandoProjetor(EPSON_CMD_ENTER); });
 
-  display.escutar(Tela1);
-  Tela1.aoSoltar([](){strcpy(telaEscolhida, "tela_1");});
+    display.escutar(botaoEsc);
+    botaoEsc.aoSoltar([]()
+                      { enviarComandoProjetor(EPSON_CMD_ESC); });
 
-  display.escutar(Tela2);
-  Tela2.aoSoltar([](){strcpy(telaEscolhida, "tela_2");});
+    display.escutar(Tela1);
+    Tela1.aoSoltar([]()
+                   { strcpy(telaEscolhida, "tela_1"); });
 
-  display.escutar(todasTelas);
-  todasTelas.aoSoltar([](){strcpy(telaEscolhida, "telas");});
+    display.escutar(Tela2);
+    Tela2.aoSoltar([]()
+                   { strcpy(telaEscolhida, "tela_2"); });
 
-  display.escutar(SubirTela);
-  SubirTela.aoSoltar([](){enviarComandoTela(TELA_UP);});
+    display.escutar(todasTelas);
+    todasTelas.aoSoltar([]()
+                        { strcpy(telaEscolhida, "telas"); });
 
-  display.escutar(DescerTela);
-  DescerTela.aoSoltar([](){enviarComandoTela(TELA_DOWN);});
+    display.escutar(SubirTela);
+    SubirTela.aoSoltar([]()
+                       { enviarComandoTela(TELA_UP); });
 
-  display.escutar(TelaParar);
-  TelaParar.aoSoltar([](){enviarComandoTela(TELA_STOP);});
+    display.escutar(DescerTela);
+    DescerTela.aoSoltar([]()
+                        { enviarComandoTela(TELA_DOWN); });
 
-  display.escutar(PowerTV);
-  PowerTV.aoSoltar([](){enviarComandotelevisao(TV_POWER);});
+    display.escutar(TelaParar);
+    TelaParar.aoSoltar([]()
+                       { enviarComandoTela(TELA_STOP); });
 
-  display.escutar(HDMITV);
-  HDMITV.aoSoltar([](){enviarComandotelevisao(TV_HDMI);});
+    display.escutar(PowerTV);
+    PowerTV.aoSoltar([]()
+                     { enviarComandotelevisao(TV_POWER); });
 
-  display.escutar(volTV_UP);
-  volTV_UP.aoSoltar([](){enviarComandotelevisao(TV_VOL_UP);});
+    display.escutar(HDMITV);
+    HDMITV.aoSoltar([]()
+    { 
+        static uint8_t portaHDMI = 6;
+        if(portaHDMI > 9) portaHDMI = 6;
+        portaHDMI++;
+        enviarComandotelevisao(portaHDMI); 
+    });
 
-  display.escutar(volTV_DOWN);
-  volTV_DOWN.aoSoltar([](){enviarComandotelevisao(TV_VOL_DOWN);});
-  
-  display.escutar(muteTV);
-  muteTV.aoSoltar([](){enviarComandotelevisao(TV_MUTE);});
+    display.escutar(volTV_UP);
+    volTV_UP.aoSoltar([]()
+                      { enviarComandotelevisao(TV_VOL_UP); });
+
+    display.escutar(volTV_DOWN);
+    volTV_DOWN.aoSoltar([]()
+                        { enviarComandotelevisao(TV_VOL_DOWN); });
+
+    display.escutar(muteTV);
+    muteTV.aoSoltar([]()
+                    { enviarComandotelevisao(TV_MUTE); });
+
+    display.escutar(AC_1);
+    AC_1.aoSoltar([]()
+                    { strcpy(AC_Escolhido, "AC_1"); });
+    
+    display.escutar(AC_2);
+    AC_2.aoSoltar([]()
+                    { strcpy(AC_Escolhido, "AC_2"); });
+
+    display.escutar(AC_3);
+    AC_3.aoSoltar([]()
+                    { strcpy(AC_Escolhido, "AC_3"); });
+
+    display.escutar(AC_4);
+    AC_4.aoSoltar([]()
+                    { strcpy(AC_Escolhido, "AC_4"); });
+
+    display.escutar(AC_ALL);
+    AC_ALL.aoSoltar([]()
+                    { strcpy(AC_Escolhido, "AC"); });
+
+    
+    
 }
 
-void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada)
+void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)
 {
-  uint32_t estadoLampada;
+    uint32_t estadoLampada;
 
-  interruptor.get("val", estadoLampada);
+    interruptor.get("val", estadoLampada);
 
-  enviarComandoLampada(nomeLampada, estadoLampada);
+    enviarComandoLampada(nomeLampada, estadoLampada);
 }
