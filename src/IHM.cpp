@@ -320,9 +320,9 @@ void configurarEventosNextion()
 
 void processarLampada(const uint8_t numLampada)
 {
-    bool estadoLampada;
+    bool estadoAtualLampada = carregarEstadoLampada(numLampada);
 
-    estadoLampada = !estadoLampada;
-    guardarEstadoLampada(numLampada, estadoLampada);
-    enviarComandoLampada(estadoLampada);
+    bool novoEstadoLampada = !estadoAtualLampada;
+    guardarEstadoLampada(numLampada, novoEstadoLampada);
+    enviarComandoLampada(novoEstadoLampada);
 }
