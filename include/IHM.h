@@ -33,7 +33,6 @@ extern NexBotaoDuplo interruptorLampada3;
 extern NexBotaoDuplo interruptorLampada4;
 
 extern NexBotao BotaoInicialProjetor;
-extern NexBotao powerProjetor;
 extern NexBotaoDuplo congelarProjetor;
 extern NexBotaoDuplo mudoProjetor;
 extern NexBotao PT_ZOOMOUT;
@@ -44,8 +43,9 @@ extern NexBotao configAdicionais;
 extern NexBotaoDuplo projetor1;
 extern NexBotaoDuplo projetor2;
 extern NexBotaoDuplo ambosProjetores;
+extern NexBotao powerProjetor;
 
-extern NexBotao BotaoVoltarProjetor;
+extern NexBotao botaoVoltarProjetor;
 extern NexBotao setaEsquerda;
 extern NexBotao setaDireita;
 extern NexBotao setaBaixo;
@@ -54,7 +54,7 @@ extern NexBotao botaoSelect;
 extern NexBotao botaoEsc;
 
 extern NexImagem PopUP;
-extern NexBotao BotaoInicial;
+extern NexBotao BotaoInicialAC;
 extern NexBotao PowerAC;
 extern NexBotaoDuplo AC_1;
 extern NexBotaoDuplo AC_2;
