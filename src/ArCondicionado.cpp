@@ -8,6 +8,7 @@
 #include "Enum.h"
 #include "ArCondicionado.h"
 
+char AC_Escolhido[32] = "";
 
 void verificarHandshakeArCondicionado(const String& mensagem)
 {
