@@ -114,6 +114,7 @@ void restaurarConfiguracoesModulos()
 {
   for(size_t i = 1; i <= 4; i++)
   {
+    snprintf(lampadaEscolhida, sizeof(lampadaEscolhida), "lampada_%d", i);
     enviarComandoLampada(carregarEstadoLampada(i));
   }
 }
