@@ -61,12 +61,10 @@ extern NexBotao botaoEsc;
 
 extern NexImagem PopUP;
 extern NexBotao BotaoInicialAC;
-extern NexBotao PowerAC;
 extern NexBotaoDuplo AC_1;
 extern NexBotaoDuplo AC_2;
 extern NexBotaoDuplo AC_3;
 extern NexBotaoDuplo AC_4;
-extern NexBotaoDuplo AC_ALL;
 extern NexBotaoDuplo AC_autoMode;
 extern NexBotaoDuplo AC_coolMode;
 extern NexBotaoDuplo AC_fanMode;
@@ -75,8 +73,10 @@ extern NexBotaoDuplo AC_fanLOW;
 extern NexBotaoDuplo AC_fanHIGH;
 extern NexBotaoDuplo AC_fanQUIET;
 extern NexTexto temp_AC;
-extern NexBotao AC_temp_UP;
 extern NexBotao AC_temp_DOWN;
+extern NexBotao AC_temp_UP;
+extern NexBotaoDuplo AC_ALL;
+extern NexBotao PowerAC;
 
 extern NexBotao BotaoInicialSensor;
 
@@ -91,6 +91,6 @@ extern NexBotaoDuplo todasTelas;
 void configurarInicializacaoNextion();
 void loopNextion();
 void configurarEventosNextion();
-void processarLampada(const uint8_t numLampada);
+void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
 
 #endif

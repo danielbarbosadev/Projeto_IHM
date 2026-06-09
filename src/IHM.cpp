@@ -1,4 +1,9 @@
 #include <Arduino.h>
+
+#define NEX_BUFFER_CMD        128   // buffer de comandos serial
+#define NEX_MAX_COMPONENTES   80    // componentes registrados simultâneos
+#define NEX_TIMEOUT_MS  100
+
 #include <NextionUI.h>
 
 //* ======================
@@ -44,7 +49,6 @@ NexBotao TV_setaESQ(2, 8, "TV_setaESQ");
 NexBotao TV_setaDIR(2, 9, "TV_setaDIR");
 NexBotao TV_setaDOWN(2, 10, "TV_setaDOWN");
 NexBotao TV_OK(2, 11, "TV_OK");
-
 
 //* BOTÕES LÂMPADA
 NexBotao btnMenuInicialLampada(3, 1, "BotaoInicial");
@@ -108,7 +112,7 @@ NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
-void processarLampada(const uint8_t numLampada);
+void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada);
 
 void configurarInicializacaoNextion()
 {
@@ -134,31 +138,18 @@ void configurarEventosNextion()
 
     display.escutar(interruptorLampada1);
     interruptorLampada1.aoSoltar([]()
-                                 { 
-                                    strcpy(lampadaEscolhida, "lampada_1");
-                                    processarLampada(1); 
-                                 });
+                                 { processarLampada(interruptorLampada1, "lampada_1"); });
 
     display.escutar(interruptorLampada2);
     interruptorLampada2.aoSoltar([]()
-                                 { 
-                                    strcpy(lampadaEscolhida, "lampada_2");
-                                    processarLampada(2); 
-                                 });
+                                 { processarLampada(interruptorLampada2, "lampada_2"); });
 
     display.escutar(interruptorLampada3);
     interruptorLampada3.aoSoltar([]()
-                                 { 
-                                    strcpy(lampadaEscolhida, "lampada_3");
-                                    processarLampada(3); 
-                                 });
-
+                                 { processarLampada(interruptorLampada3, "lampada_3"); });
     display.escutar(interruptorLampada4);
     interruptorLampada4.aoSoltar([]()
-                                 { 
-                                    strcpy(lampadaEscolhida, "lampada_4");
-                                    processarLampada(4); 
-                                 });
+                                 { processarLampada(interruptorLampada4, "lampada_4"); });
 
     display.escutar(projetor1);
     projetor1.aoSoltar([]()
@@ -170,7 +161,7 @@ void configurarEventosNextion()
 
     display.escutar(ambosProjetores);
     ambosProjetores.aoSoltar([]()
-                    {strcpy(projetorEscolhido, "projetor"); });
+                             { strcpy(projetorEscolhido, "projetor"); });
 
     display.escutar(powerProjetor);
     powerProjetor.aoSoltar([]()
@@ -190,7 +181,7 @@ void configurarEventosNextion()
 
     display.escutar(botaoVoltarProjetor);
     botaoVoltarProjetor.aoSoltar([]()
-                                { enviarComandoProjetor(EPSON_CMD_MENU); });
+                                 { enviarComandoProjetor(EPSON_CMD_MENU); });
 
     display.escutar(volProjetorAumentar);
     volProjetorAumentar.aoSoltar([]()
@@ -254,12 +245,11 @@ void configurarEventosNextion()
 
     display.escutar(HDMITV);
     HDMITV.aoSoltar([]()
-    { 
+                    { 
         static uint8_t portaHDMI = 6;
         portaHDMI++;
         if(portaHDMI > 8) portaHDMI = 6;
-        enviarComandotelevisao(portaHDMI); 
-    });
+        enviarComandotelevisao(portaHDMI); });
 
     display.escutar(volTV_UP);
     volTV_UP.aoSoltar([]()
@@ -269,65 +259,85 @@ void configurarEventosNextion()
     volTV_DOWN.aoSoltar([]()
                         { enviarComandotelevisao(TV_VOL_DOWN); });
 
+    display.escutar(TV_setaUP);
+    TV_setaUP.aoSoltar([]()
+                       { enviarComandotelevisao(TV_UP); }); //! PARA AQUI
+
+    display.escutar(TV_setaDOWN);
+    TV_setaDOWN.aoSoltar([]()
+                         { enviarComandotelevisao(TV_DOWN); });
+
+    display.escutar(TV_setaDIR);
+    TV_setaDIR.aoSoltar([]()
+                        { enviarComandotelevisao(TV_RIGHT); });
+
+    display.escutar(TV_setaESQ);
+    TV_setaESQ.aoSoltar([]()
+                        { enviarComandotelevisao(TV_LEFT); }); 
+
     display.escutar(muteTV);
     muteTV.aoSoltar([]()
                     { enviarComandotelevisao(TV_MUTE); });
 
     display.escutar(AC_1);
     AC_1.aoSoltar([]()
-                    { strcpy(AC_Escolhido, "AC_1"); });
-    
+                  {   
+                        debugInfo("Entrou aqui no AC 1");
+                        strcpy(AC_Escolhido, "AC_1"); });
+
     display.escutar(AC_2);
     AC_2.aoSoltar([]()
-                    { strcpy(AC_Escolhido, "AC_2"); });
+                  { strcpy(AC_Escolhido, "AC_2"); });
 
     display.escutar(AC_3);
     AC_3.aoSoltar([]()
-                    { strcpy(AC_Escolhido, "AC_3"); });
+                  { strcpy(AC_Escolhido, "AC_3"); });
 
     display.escutar(AC_4);
     AC_4.aoSoltar([]()
-                    { strcpy(AC_Escolhido, "AC_4"); });
+                  { strcpy(AC_Escolhido, "AC_4"); });
 
     display.escutar(AC_ALL);
     AC_ALL.aoSoltar([]()
                     { strcpy(AC_Escolhido, "AC"); });
 
+    display.escutar(PowerAC);
+    PowerAC.aoSoltar([]()
+                     { enviarComandoAC(AC_POWER); });
+
     display.escutar(AC_autoMode);
     AC_autoMode.aoSoltar([]()
-                    { enviarComandoAC(AC_AUTO_MODE); });
+                         { enviarComandoAC(AC_AUTO_MODE); });
 
     display.escutar(AC_coolMode);
     AC_coolMode.aoSoltar([]()
-                    { enviarComandoAC(AC_COOL_MODE); });
-                
+                         { enviarComandoAC(AC_COOL_MODE); });
+
     display.escutar(AC_fanMode);
     AC_fanMode.aoSoltar([]()
-                    { enviarComandoAC(AC_FAN_MODE); });
+                        { enviarComandoAC(AC_FAN_MODE); });
 
     display.escutar(AC_fanLOW);
     AC_fanLOW.aoSoltar([]()
-                    { enviarComandoAC(AC_FAN_LOW); });
+                       { enviarComandoAC(AC_FAN_LOW); });
 
     display.escutar(AC_fanMEDIUM);
     AC_fanMEDIUM.aoSoltar([]()
-                    { enviarComandoAC(AC_FAN_MEDIUM); });
+                          { enviarComandoAC(AC_FAN_MEDIUM); });
 
     display.escutar(AC_fanHIGH);
     AC_fanHIGH.aoSoltar([]()
-                    { enviarComandoAC(AC_FAN_HIGH); });
+                        { enviarComandoAC(AC_FAN_HIGH); });
 
     display.escutar(AC_fanQUIET);
     AC_fanQUIET.aoSoltar([]()
-                    { enviarComandoAC(AC_FAN_QUIET); });
-
+                         { enviarComandoAC(AC_FAN_QUIET); });
 }
 
-void processarLampada(const uint8_t numLampada)
+void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)
 {
-    bool estadoAtualLampada = carregarEstadoLampada(numLampada);
+    uint32_t estadoLampada;
 
-    bool novoEstadoLampada = !estadoAtualLampada;
-    guardarEstadoLampada(numLampada, novoEstadoLampada);
-    enviarComandoLampada(novoEstadoLampada);
+    interruptor.get("val", estadoLampada);
+    enviarComandoLampada(nomeLampada, estadoLampada);
 }

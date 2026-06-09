@@ -34,8 +34,8 @@ enum comandosProjetor
   EPSON_CMD_HOME,
   EPSON_CMD_MENU,
 
-  EPSON_CMD_VOL_UP,
   EPSON_CMD_VOL_DOWN,
+  EPSON_CMD_VOL_UP,
 
   EPSON_CMD_ZOOM_IN,
   EPSON_CMD_ZOOM_OUT,
@@ -69,8 +69,8 @@ enum comandosProjetor
 enum ComandosTV
 {
   TV_POWER = 1,
-  TV_VOL_UP,
   TV_VOL_DOWN,
+  TV_VOL_UP,
   TV_SELECT,
   TV_MUTE,
   TV_HDMI_1,
@@ -85,6 +85,7 @@ enum ComandosTV
 
 enum ComandosAC
 {
+  AC_POWER,
   AC_AUTO_MODE,
   AC_COOL_MODE,
   AC_FAN_MODE,
