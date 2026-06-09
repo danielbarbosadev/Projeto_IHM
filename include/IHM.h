@@ -25,6 +25,12 @@ extern NexBotao volTV_UP;
 extern NexBarraProgresso volBarTV;
 extern NexBotao volTV_DOWN;
 extern NexBotaoDuplo muteTV;
+extern NexBotao TV_setaUP;
+extern NexBotao TV_setaESQ;
+extern NexBotao TV_setaDIR;
+extern NexBotao TV_setaDOWN;
+extern NexBotao TV_OK;
+
 
 extern NexBotao btnMenuInicialLampada;
 extern NexBotaoDuplo interruptorLampada1;

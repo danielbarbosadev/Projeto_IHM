@@ -37,9 +37,14 @@ NexBotao BtnInicialTelevisao(2, 1, "BotaoInicial");
 NexBotaoDuplo PowerTV(2, 2, "PowerTV");
 NexBotao HDMITV(2, 3, "HDMITV");
 NexBotao volTV_UP(2, 4, "volTV_UP");
-NexBarraProgresso volBarTV(2, 5, "volBarTV");
-NexBotao volTV_DOWN(2, 6, "volTV_DOWN");
-NexBotaoDuplo muteTV(2, 7, "muteTV");
+NexBotao volTV_DOWN(2, 5, "volTV_DOWN");
+NexBotaoDuplo muteTV(2, 6, "muteTV");
+NexBotao TV_setaUP(2, 7, "TV_setaUP");
+NexBotao TV_setaESQ(2, 8, "TV_setaESQ");
+NexBotao TV_setaDIR(2, 9, "TV_setaDIR");
+NexBotao TV_setaDOWN(2, 10, "TV_setaDOWN");
+NexBotao TV_OK(2, 11, "TV_OK");
+
 
 //* BOTÕES LÂMPADA
 NexBotao btnMenuInicialLampada(3, 1, "BotaoInicial");
@@ -252,7 +257,7 @@ void configurarEventosNextion()
     { 
         static uint8_t portaHDMI = 6;
         portaHDMI++;
-        if(portaHDMI > 9) portaHDMI = 6;
+        if(portaHDMI > 8) portaHDMI = 6;
         enviarComandotelevisao(portaHDMI); 
     });
 
