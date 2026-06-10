@@ -131,11 +131,8 @@ void loopNextion()
     display.atualizar();
 }
 
-void configurarEventosNextion()
+void configurarEventosLampadas()
 {
-    display.escutar(btnMenuSensor);
-    btnMenuSensor.aoSoltar(enviarComandoSensor);
-
     display.escutar(interruptorLampada1);
     interruptorLampada1.aoSoltar([]()
                                  { processarLampada(interruptorLampada1, "lampada_1"); });
@@ -150,7 +147,10 @@ void configurarEventosNextion()
     display.escutar(interruptorLampada4);
     interruptorLampada4.aoSoltar([]()
                                  { processarLampada(interruptorLampada4, "lampada_4"); });
+}
 
+void configurarEventosProjetor()
+{
     display.escutar(projetor1);
     projetor1.aoSoltar([]()
                        { strcpy(projetorEscolhido, "projetor_1"); });
@@ -193,7 +193,11 @@ void configurarEventosNextion()
 
     display.escutar(PT_ZOOMIN);
     PT_ZOOMIN.aoSoltar([]()
-                        {});
+                        { enviarComandoProjetor(EPSON_CMD_ZOOM_IN); });
+
+    display.escutar(PT_ZOOMOUT);
+    PT_ZOOMOUT.aoSoltar([]()
+                        { enviarComandoProjetor(EPSON_CMD_ZOOM_OUT); });
 
     display.escutar(setaCima);
     setaCima.aoSoltar([]()
@@ -218,7 +222,10 @@ void configurarEventosNextion()
     display.escutar(botaoEsc);
     botaoEsc.aoSoltar([]()
                       { enviarComandoProjetor(EPSON_CMD_ESC); });
+}
 
+void configurarEventosTela()
+{
     display.escutar(Tela1);
     Tela1.aoSoltar([]()
                    { strcpy(telaEscolhida, "tela_1"); });
@@ -242,7 +249,10 @@ void configurarEventosNextion()
     display.escutar(TelaParar);
     TelaParar.aoSoltar([]()
                        { enviarComandoTela(TELA_STOP); });
+}
 
+void configurarEventosTv()
+{
     display.escutar(PowerTV);
     PowerTV.aoSoltar([]()
                      { enviarComandotelevisao(TV_POWER); });
@@ -286,28 +296,29 @@ void configurarEventosNextion()
     display.escutar(TV_OK);
     TV_OK.aoSoltar([]()
                     {enviarComandotelevisao(TV_SELECT);});
+}
 
+void configurarEventosAc()
+{
     display.escutar(AC_1);
     AC_1.aoSoltar([]()
-                  {   
-                        debugInfo("Entrou aqui no AC 1");
-                        strcpy(AC_Escolhido, "AC_1"); });
+                  { strcpy(AC_Escolhido, "ac_1"); });
 
     display.escutar(AC_2);
     AC_2.aoSoltar([]()
-                  { strcpy(AC_Escolhido, "AC_2"); });
+                  { strcpy(AC_Escolhido, "ac_2"); });
 
     display.escutar(AC_3);
     AC_3.aoSoltar([]()
-                  { strcpy(AC_Escolhido, "AC_3"); });
+                  { strcpy(AC_Escolhido, "ac_3"); });
 
     display.escutar(AC_4);
     AC_4.aoSoltar([]()
-                  { strcpy(AC_Escolhido, "AC_4"); });
+                  { strcpy(AC_Escolhido, "ac_4"); });
 
     display.escutar(AC_ALL);
     AC_ALL.aoSoltar([]()
-                    { strcpy(AC_Escolhido, "AC"); });
+                    { strcpy(AC_Escolhido, "ac"); });
 
     display.escutar(PowerAC);
     PowerAC.aoSoltar([]()
@@ -348,6 +359,22 @@ void configurarEventosNextion()
     display.escutar(AC_temp_UP);
     AC_temp_UP.aoSoltar([]()
                         { enviarComandoAC(AC_TEMP_UP); });
+}
+
+void configurarEventosSensor()
+{
+    display.escutar(btnMenuSensor);
+    btnMenuSensor.aoSoltar(enviarComandoSensor);
+}
+
+void configurarEventosNextion()
+{ 
+    configurarEventosSensor();
+    configurarEventosLampadas();
+    configurarEventosProjetor();
+    configurarEventosTela();
+    configurarEventosTv();
+    configurarEventosAc();
 }
 
 void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)

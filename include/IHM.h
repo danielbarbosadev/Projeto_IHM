@@ -90,6 +90,12 @@ extern NexBotaoDuplo todasTelas;
 
 void configurarInicializacaoNextion();
 void loopNextion();
+void configurarEventosLampadas();
+void configurarEventosProjetor();
+void configurarEventosTela();
+void configurarEventosTv();
+void configurarEventosAc();
+void configurarEventosSensor();
 void configurarEventosNextion();
 void processarLampada(NexBotaoDuplo& interruptor, const char* nomeLampada);
 
