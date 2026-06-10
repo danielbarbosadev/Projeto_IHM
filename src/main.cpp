@@ -66,27 +66,27 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
   switch (topicoRecebido)
   {
   case TOPICO_PROJETOR:
-    verificarHandshakeProjetor(mensagem);
+    verificarMensagemProjetor(mensagem);
     break;
 
   case TOPICO_TELA:
-    verificarHandshakeTela(mensagem);
+    verificarMensagemTela(mensagem);
     break;
 
   case TOPICO_TELEVISAO:
-    verificarHandshakeTelevisao(mensagem);
+    verificarMensagemTelevisao(mensagem);
     break;
 
   case TOPICO_LAMPADAS:
-    verificarHandshakeLampadas(mensagem);
+    verificarMensagemLampadas(mensagem);
     break;
 
   case TOPICO_AR_CONDICIONADO:
-    verificarHandshakeArCondicionado(mensagem);
+    verificarMensagemArCondicionado(mensagem);
     break;
 
   case TOPICO_SENSOR:
-    verificarHandshakeSensor(mensagem);
+    verificarMensagemSensor(mensagem);
     break;
 
   default:
