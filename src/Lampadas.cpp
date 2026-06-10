@@ -21,17 +21,23 @@ void verificarHandshakeLampadas(const String& mensagem)
         return;
     }
 
-    if (doc["handshake"]["situacao"].isNull())
+    if (doc["statusComando"]["comando"].isNull())
+    {
+        debugErro("Resposta do comando não foi enviada no JSON");
+        return;
+    }
+
+    if (doc["statusComando"]["situacao"].isNull())
     {
         debugErro("Resposta da situação não foi enviada no JSON");
         return;
     }
     
-    if (doc["handshake"]["situacao"].is<bool>())
+    if (doc["statusComando"]["comando"].is<bool>())
     {
-        bool handshake = doc["handshake"]["situacao"].as<bool>();
+        bool comando = doc["statusComando"]["comando"].as<bool>();
 
-        if (!handshake)
+        if (!comando)
         {
             debugErro("Falha no comando, reenvie denovo");
         }
@@ -39,6 +45,11 @@ void verificarHandshakeLampadas(const String& mensagem)
         {
             debugInfo("Comando confirmado");
         }
+    }
+
+    if (doc["statusComando"]["situacao"].is<const char*>())
+    {
+        const char* situacao = doc["statusComando"]["situacao"].as<const char*>();
     }
 }
 
