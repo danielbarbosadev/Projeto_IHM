@@ -3,7 +3,7 @@
 
 extern char projetorEscolhido[32];
 
-void verificarHandshakeProjetor(const String& mensagem);
+void verificarMensagemProjetor(const String& mensagem);
 void enviarComandoProjetor(uint32_t comandoProjetor);
 
 #endif
