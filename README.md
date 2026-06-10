@@ -18,7 +18,7 @@ Firmware para ESP32-S3 que controla os equipamentos de uma sala de aula via touc
 | Projetor | `Projetor.cpp` | Controle completo de projetor (power, freeze, mute, zoom, navegação, fontes...) |
 | Televisão | `Televisao.cpp` | Controle de TV (power, HDMI, volume, mudo, direcionais) |
 | Lâmpadas | `Lampadas.cpp` | Controle de lâmpadas independentes com estado ligado/desligado |
-| Ar-condicionado | `ArCondicionado.cpp` | Controle de ares-condicionados unidades — modo, temperatura e velocidade do ventilador |
+| Ar-condicionado | `ArCondicionado.cpp` | Controle de ares-condicionados — modo, temperatura e velocidade do ventilador |
 | Tela de projeção | `Tela.cpp` | Motor de tela (subir, descer, parar) com seleção de qual tela |
 | Sensor de temperatura | `Sensor.cpp` | Solicitação de leitura de temperatura ambiente |
 
