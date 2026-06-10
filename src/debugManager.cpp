@@ -52,8 +52,8 @@ uint32_t obterNivelDebugAtual()
 
 void configurarDebug()
 {
-    Serial.begin(9600);
-    delay(1000);
+    Serial.begin(115200);
+    delay(200);
 
     pinMode(PINO_HABILITA_DEBUG_COMPLETO, INPUT_PULLUP);
 
@@ -67,18 +67,18 @@ void configurarDebug()
     }
 
     debugInfoSemLinha("\n\n\n\n\n\r");
-    debugInfo("===================");
+    debugInfo("===============================================");
     debugInfo(" ESP32 INICIADO");
     debugInfo(" SISTEMA DE DEBUG ATIVO");
 
     if (nivelDebugAtual == DEBUG_TUDO)
     {
-        Serial.println("[INFO] Debug iniciado em modo completo");
+        Serial.println("[INFO] DEBUG INICIADO EM MODO COMPLETO");
     }
     
     else if (nivelDebugAtual == DEBUG_ERRO)
     {
-         Serial.println("[INFO] Debug iniciado em apenas erros");
+        Serial.println("[INFO] DEBUG INICIADO EM APENAS ERROS");
     }
-    debugInfo("===================");
+    debugInfo("===============================================");
 }
