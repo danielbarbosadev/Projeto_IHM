@@ -88,6 +88,10 @@ extern NexBotaoDuplo Tela1;
 extern NexBotaoDuplo Tela2;
 extern NexBotaoDuplo todasTelas;
 
+extern NexImagem pop_ERRO;
+extern NexTexto txt_ERRO;
+extern NexBotao ERRO_OK;
+
 void configurarInicializacaoNextion();
 void loopNextion();
 void configurarEventosLampadas();
