@@ -43,6 +43,12 @@ void verificarMensagemProjetor(const String& mensagem)
 
 void enviarComandoProjetor(uint32_t comandoProjetor)
 {
+    if(strlen(projetorEscolhido) == 0)
+    {
+        debugErro("Nenhum projetor foi escolhido");
+        return;
+    }
+
     JsonDocument doc;
     String mensagem = "";
 

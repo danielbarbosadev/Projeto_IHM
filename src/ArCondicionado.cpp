@@ -43,6 +43,12 @@ void verificarMensagemArCondicionado(const String& mensagem)
 
 void enviarComandoAC(uint32_t comandoAC)
 {
+    if(strlen(AC_Escolhido) == 0)
+    {
+        debugErro("Nenhum Ar-Condicionado foi escolhido");
+        return;
+    }
+
     JsonDocument doc;
     String mensagem = "";
 

@@ -43,6 +43,12 @@ void verificarMensagemTela(const String& mensagem)
 
 void enviarComandoTela(uint32_t comandoTela)
 {
+    if(strlen(telaEscolhida) == 0)
+    {
+        debugErro("Nenhuma tela foi escolhida");
+        return;
+    }
+
     JsonDocument doc;
     String mensagem = "";
     
