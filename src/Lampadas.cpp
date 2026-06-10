@@ -8,7 +8,7 @@
 #include "Enum.h"
 #include "Lampadas.h"
 
-void verificarHandshakeLampadas(const String& mensagem)
+void verificarMensagemLampadas(const String& mensagem)
 {
     JsonDocument doc;
 

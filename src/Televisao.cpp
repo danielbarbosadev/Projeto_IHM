@@ -8,7 +8,7 @@
 #include "Enum.h"
 #include "Televisao.h"
 
-void verificarHandshakeTelevisao(const String& mensagem)
+void verificarMensagemTelevisao(const String& mensagem)
 {
     JsonDocument doc;
 
@@ -21,24 +21,21 @@ void verificarHandshakeTelevisao(const String& mensagem)
         return;
     }
 
-    if (doc["handshake"]["situacao"].isNull())
+    if (doc["statusComando"]["comando"].isNull())
+    {
+        debugErro("Resposta do comando não foi enviada no JSON");
+        return;
+    }
+
+    if (doc["statusComando"]["situacao"].isNull())
     {
         debugErro("Resposta da situação não foi enviada no JSON");
         return;
     }
     
-    if (doc["handshake"]["situacao"].is<bool>())
+    if (doc["statusComando"]["situacao"].is<const char*>())
     {
-        bool handshake = doc["handshake"]["situacao"].as<bool>();
-
-        if (!handshake)
-        {
-            debugErro("Falha no comando, reenvie denovo");
-        }
-        else
-        {
-            debugInfo("Comando confirmado");
-        }
+       const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
     }
 }
 void enviarComandotelevisao(uint32_t comandoTelevisao)
