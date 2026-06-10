@@ -191,6 +191,10 @@ void configurarEventosNextion()
     volProjetorDiminuir.aoSoltar([]()
                                  { enviarComandoProjetor(EPSON_CMD_VOL_DOWN); });
 
+    display.escutar(PT_ZOOMIN);
+    PT_ZOOMIN.aoSoltar([]()
+                        {});
+
     display.escutar(setaCima);
     setaCima.aoSoltar([]()
                       { enviarComandoProjetor(EPSON_CMD_UP); });
@@ -261,7 +265,7 @@ void configurarEventosNextion()
 
     display.escutar(TV_setaUP);
     TV_setaUP.aoSoltar([]()
-                       { enviarComandotelevisao(TV_UP); }); //! PARA AQUI
+                       { enviarComandotelevisao(TV_UP); });
 
     display.escutar(TV_setaDOWN);
     TV_setaDOWN.aoSoltar([]()
@@ -278,6 +282,10 @@ void configurarEventosNextion()
     display.escutar(muteTV);
     muteTV.aoSoltar([]()
                     { enviarComandotelevisao(TV_MUTE); });
+
+    display.escutar(TV_OK);
+    TV_OK.aoSoltar([]()
+                    {enviarComandotelevisao(TV_SELECT);});
 
     display.escutar(AC_1);
     AC_1.aoSoltar([]()
@@ -332,6 +340,14 @@ void configurarEventosNextion()
     display.escutar(AC_fanQUIET);
     AC_fanQUIET.aoSoltar([]()
                          { enviarComandoAC(AC_FAN_QUIET); });
+
+    display.escutar(AC_temp_DOWN);
+    AC_temp_DOWN.aoSoltar([]()
+                        { enviarComandoAC(AC_TEMP_DOWN); });
+
+    display.escutar(AC_temp_UP);
+    AC_temp_UP.aoSoltar([]()
+                        { enviarComandoAC(AC_TEMP_UP); });
 }
 
 void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada)
