@@ -112,6 +112,33 @@ NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
 
+//* POP-UP TELAS
+
+// POP-UP TV
+NexImagem pop_ERRO (2, 12, "pop_ERRO");
+NexTexto txt_ERRO (2, 13, "txt_ERRO");
+NexBotao ERRO_OK (2, 14, "ERRO_OK"); 
+// POP-UP LAMPADA
+NexImagem pop_ERRO (3, 6, "pop_ERRO");
+NexTexto txt_ERRO (3, 7, "txt_ERRO");
+NexBotao ERRO_OK (3, 8, "ERRO_OK");
+// POP-UP PROJETOR
+NexImagem pop_ERRO (4, 13, "pop_ERRO");
+NexTexto txt_ERRO (4, 14, "txt_ERRO");
+NexBotao ERRO_OK (4, 15, "ERRO_OK");
+// POP-UP PROJETOR CONFIGS
+NexImagem pop_ERRO (5, 8, "pop_ERRO");
+NexTexto txt_ERRO (5, 9, "txt_ERRO");
+NexBotao ERRO_OK (5, 10, "ERRO_OK");
+// POP-UP AR-CONDICIONADO
+NexImagem pop_ERRO (6, 19, "pop_ERRO");
+NexTexto txt_ERRO (6, 20, "txt_ERRO");
+NexBotao ERRO_OK (6, 21, "ERRO_OK");
+// POP-UP TELA
+NexImagem pop_ERRO (8, 8, "pop_ERRO");
+NexTexto txt_ERRO (8, 9, "txt_ERRO");
+NexBotao ERRO_OK (8, 10, "ERRO_OK");
+
 void processarLampada(NexBotaoDuplo &interruptor, const char *nomeLampada);
 
 void configurarInicializacaoNextion()
