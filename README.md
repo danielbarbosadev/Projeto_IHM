@@ -3,10 +3,10 @@
 
 Firmware para ESP32-S3 que controla os equipamentos de uma sala de aula via touchscreen Nextion e protocolo MQTT — API em português, arquitetura modular por equipamento, roteamento automático de tópicos e suporte a AWS IoT Core.
 
-[![Plataforma](https://img.shields.io/badge/plataforma-ESP32--S3-blue)](https://platformio.org)
-[![Framework](https://img.shields.io/badge/framework-Arduino-teal)](https://arduino.cc)
-[![Protocolo](https://img.shields.io/badge/protocolo-MQTT-purple)](https://mqtt.org)
-[![Licença](https://img.shields.io/badge/licença-MIT-green)](LICENSE)
+[![Plataforma](https://img.shields.io/badge/plataforma-ESP32--S3-blue)](https://platformio.org) <br>
+[![Framework](https://img.shields.io/badge/framework-Arduino-teal)](https://arduino.cc) <br>
+[![Protocolo](https://img.shields.io/badge/protocolo-MQTT-purple)](https://mqtt.org)<br>
+[![Licença](https://img.shields.io/badge/licença-MIT-green)](LICENSE)<br>
 [![Versão](https://img.shields.io/badge/versão-2.1-orange)](platformio.ini)
 
 ---
