@@ -139,10 +139,10 @@ MIT — veja [LICENSE](LICENSE)
 
 ## Autores
 
-**Daniel Barbosa** — [@danielbarbosadev](https://github.com/danielbarbosadev)
-**Kevin Silva** — [@KevinNipinho](https://github.com/KevinNipinho)
-**Marcus Vinicius** — [@Marcus56480](https://github.com/Marcus56480)
-**Pedro Henrique** — [@PedroHs557](https://github.com/PedroHs557)
+- **Daniel Barbosa** — [@danielbarbosadev](https://github.com/danielbarbosadev)
+- **Kevin Silva** — [@KevinNipinho](https://github.com/KevinNipinho)
+- **Marcus Vinicius** — [@Marcus56480](https://github.com/Marcus56480)
+- **Pedro Henrique** — [@PedroHs557](https://github.com/PedroHs557)
 
 
 Desenvolvido no **SENAI Informática** como projeto de automação de sala de aula com ESP32 e MQTT.
