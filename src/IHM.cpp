@@ -49,6 +49,9 @@ NexBotao TV_setaESQ(2, 8, "TV_setaESQ");
 NexBotao TV_setaDIR(2, 9, "TV_setaDIR");
 NexBotao TV_setaDOWN(2, 10, "TV_setaDOWN");
 NexBotao TV_OK(2, 11, "TV_OK");
+NexImagem popUpErroTv (2, 12, "pop_ERRO");
+NexTexto txtErroTv (2, 13, "txt_ERRO");
+NexBotao btnOkTv (2, 14, "ERRO_OK");
 
 //* BOTÕES LÂMPADA
 NexBotao btnMenuInicialLampada(3, 1, "BotaoInicial");
@@ -56,6 +59,9 @@ NexBotaoDuplo interruptorLampada1(3, 2, "interruptor1");
 NexBotaoDuplo interruptorLampada2(3, 3, "interruptor2");
 NexBotaoDuplo interruptorLampada3(3, 4, "interruptor3");
 NexBotaoDuplo interruptorLampada4(3, 5, "interruptor4");
+NexImagem popUpErroLampada (3, 6, "pop_ERRO");
+NexTexto txtErroLampada (3, 7, "txt_ERRO");
+NexBotao btnErroLampada (3, 8, "ERRO_OK");
 
 //* BOTÕES PROJETOR
 NexBotao BotaoInicialProjetor(4, 1, "BotaoInicial");
@@ -70,6 +76,9 @@ NexBotaoDuplo projetor1(4, 9, "PT_esquerda");
 NexBotaoDuplo projetor2(4, 10, "PT_direita");
 NexBotaoDuplo ambosProjetores(4, 11, "PT_ambos");
 NexBotao powerProjetor(4, 12, "powerPT");
+NexImagem popUpErroProjetor (4, 13, "pop_ERRO");
+NexTexto txtErroProjetor (4, 14, "txt_ERRO");
+NexBotao btnOkProjetor (4, 15, "ERRO_OK");
 
 //* BOTÕES MORE CONFIGS PROJETOR
 NexBotao botaoVoltarProjetor(5, 1, "MenuProjetor");
@@ -79,6 +88,9 @@ NexBotao setaBaixo(5, 4, "setaDOWN");
 NexBotao setaCima(5, 5, "setaUP");
 NexBotao botaoSelect(5, 6, "botaoSelect");
 NexBotao botaoEsc(5, 7, "botaoESC");
+NexImagem popUpErroProjConfig (5, 8, "pop_ERRO");
+NexTexto txtErroProjConfig (5, 9, "txt_ERRO");
+NexBotao btnOkProjConfig (5, 10, "ERRO_OK");
 
 //* BOTÕES AR-CONDICIONADO
 NexImagem PopUP(6, 1, "p0");
@@ -99,9 +111,15 @@ NexBotao AC_temp_DOWN(6, 15, "AC_temp_UP");
 NexBotao AC_temp_UP(6, 16, "AC_temp_DOWN");
 NexBotaoDuplo AC_ALL(6, 17, "AC_ALL");
 NexBotao PowerAC(6, 18, "powerAC");
+NexImagem popUpErroAc (6, 19, "pop_ERRO");
+NexTexto txtErroAc (6, 20, "txt_ERRO");
+NexBotao btnOkAc (6, 21, "ERRO_OK");
 
 //* BOTÕES TEMPERATURA
 NexBotao BotaoInicialSensor(7, 1, "BotaoInicial");
+NexTexto textoUmidade (7, 2, "t0");
+NexTexto textoTemperatura (7, 3, "t1");
+NexTexto textoSom (7, 4, "t2");
 
 //* BOTÕES TELA
 NexBotao btnMenuInicialTela(8, 1, "BotaoInicial");
@@ -111,30 +129,6 @@ NexBotao TelaParar(8, 4, "telaFreeze");
 NexBotaoDuplo Tela1(8, 5, "tela_Esquerda");
 NexBotaoDuplo Tela2(8, 6, "tela_Direita");
 NexBotaoDuplo todasTelas(8, 7, "ambasTelas");
-
-//* POP-UP TELAS
-
-// POP-UP TV
-NexImagem popUpErroTv (2, 12, "pop_ERRO");
-NexTexto txtErroTv (2, 13, "txt_ERRO");
-NexBotao btnOkTv (2, 14, "ERRO_OK"); 
-// POP-UP LAMPADA
-NexImagem popUpErroLampada (3, 6, "pop_ERRO");
-NexTexto txtErroLampada (3, 7, "txt_ERRO");
-NexBotao btnErroLampada (3, 8, "ERRO_OK");
-// POP-UP PROJETOR
-NexImagem popUpErroProjetor (4, 13, "pop_ERRO");
-NexTexto txtErroProjetor (4, 14, "txt_ERRO");
-NexBotao btnOkProjetor (4, 15, "ERRO_OK");
-// POP-UP PROJETOR CONFIGS
-NexImagem popUpErroProjConfig (5, 8, "pop_ERRO");
-NexTexto txtErroProjConfig (5, 9, "txt_ERRO");
-NexBotao btnOkProjConfig (5, 10, "ERRO_OK");
-// POP-UP AR-CONDICIONADO
-NexImagem popUpErroAc (6, 19, "pop_ERRO");
-NexTexto txtErroAc (6, 20, "txt_ERRO");
-NexBotao btnOkAc (6, 21, "ERRO_OK");
-// POP-UP TELA
 NexImagem popUpErroTela (8, 8, "pop_ERRO");
 NexTexto txtErroTela (8, 9, "txt_ERRO");
 NexBotao btnErroTela (8, 10, "ERRO_OK");

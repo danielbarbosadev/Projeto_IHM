@@ -7,6 +7,7 @@
 #include "DebugManager.h"
 #include "Enum.h"
 #include "ArCondicionado.h"
+#include "IHM.h"
 
 char AC_Escolhido[32] = "";
 
@@ -38,6 +39,10 @@ void verificarMensagemArCondicionado(const String& mensagem)
     if (doc["statusComando"]["situacao"].is<const char*>())
     {
        const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
+       if(strstr(situacao, "[ERRO]") != nullptr)
+        {
+            mostrarErroAc(situacao);
+        }
     }
 }
 
@@ -55,4 +60,11 @@ void enviarComandoAC(uint32_t comandoAC)
     doc[AC_Escolhido]["comando"] = comandoAC;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+
+void mostrarErroAc(const char* mensagemErro)
+{
+    popUpErroAc.visivel(true);
+    //btnErroAc.visivel(true);            
+    txtErroAc.texto(mensagemErro).visivel(true);
 }

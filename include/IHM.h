@@ -11,6 +11,7 @@ extern const uint8_t NEXTION_PIN_RX;
 
 extern NexDisplay display;
 
+//* BOTÕES MENU PRINCIPAL
 extern NexBotao btnMenuTv;
 extern NexBotao btnMenuLampada;
 extern NexBotao btnMenuArCondicionado;
@@ -18,11 +19,11 @@ extern NexBotao btnMenuSensor;
 extern NexBotao btnMenuProjetor;
 extern NexBotao btnMenuTela;
 
+//* BOTÕES TELEVISÃO
 extern NexBotao BtnInicialTelevisao;
 extern NexBotaoDuplo PowerTV;
 extern NexBotao HDMITV;
 extern NexBotao volTV_UP;
-extern NexBarraProgresso volBarTV;
 extern NexBotao volTV_DOWN;
 extern NexBotaoDuplo muteTV;
 extern NexBotao TV_setaUP;
@@ -30,14 +31,21 @@ extern NexBotao TV_setaESQ;
 extern NexBotao TV_setaDIR;
 extern NexBotao TV_setaDOWN;
 extern NexBotao TV_OK;
+extern NexImagem popUpErroTv ;
+extern NexTexto txtErroTv;
+extern NexBotao btnOkTv;
 
-
+//* BOTÕES LÂMPADA
 extern NexBotao btnMenuInicialLampada;
 extern NexBotaoDuplo interruptorLampada1;
 extern NexBotaoDuplo interruptorLampada2;
 extern NexBotaoDuplo interruptorLampada3;
 extern NexBotaoDuplo interruptorLampada4;
+extern NexImagem popUpErroLampada ;
+extern NexTexto txtErroLampada ;
+extern NexBotao btnErroLampada ;
 
+//* BOTÕES PROJETOR
 extern NexBotao BotaoInicialProjetor;
 extern NexBotaoDuplo congelarProjetor;
 extern NexBotaoDuplo mudoProjetor;
@@ -50,7 +58,11 @@ extern NexBotaoDuplo projetor1;
 extern NexBotaoDuplo projetor2;
 extern NexBotaoDuplo ambosProjetores;
 extern NexBotao powerProjetor;
+extern NexImagem popUpErroProjetor ;
+extern NexTexto txtErroProjetor ;
+extern NexBotao btnOkProjetor ;
 
+//* BOTÕES MORE CONFIGS PROJETOR
 extern NexBotao botaoVoltarProjetor;
 extern NexBotao setaEsquerda;
 extern NexBotao setaDireita;
@@ -58,7 +70,11 @@ extern NexBotao setaBaixo;
 extern NexBotao setaCima;
 extern NexBotao botaoSelect;
 extern NexBotao botaoEsc;
+extern NexImagem popUpErroProjConfig ;
+extern NexTexto txtErroProjConfig ;
+extern NexBotao btnOkProjConfig ;
 
+//* BOTÕES AR-CONDICIONADO
 extern NexImagem PopUP;
 extern NexBotao BotaoInicialAC;
 extern NexBotaoDuplo AC_1;
@@ -77,9 +93,17 @@ extern NexBotao AC_temp_DOWN;
 extern NexBotao AC_temp_UP;
 extern NexBotaoDuplo AC_ALL;
 extern NexBotao PowerAC;
+extern NexImagem popUpErroAc ;
+extern NexTexto txtErroAc ;
+extern NexBotao btnOkAc ;
 
+//* BOTÕES TEMPERATURA
 extern NexBotao BotaoInicialSensor;
+extern NexTexto textoUmidade ;
+extern NexTexto textoTemperatura ;
+extern NexTexto textoSom ;
 
+//* BOTÕES TELA
 extern NexBotao btnMenuInicialTela;
 extern NexBotao DescerTela;
 extern NexBotao SubirTela;
@@ -87,29 +111,9 @@ extern NexBotao TelaParar;
 extern NexBotaoDuplo Tela1;
 extern NexBotaoDuplo Tela2;
 extern NexBotaoDuplo todasTelas;
-
-extern NexImagem popUpErroTv;
-extern NexTexto txtErroTv;
-extern NexBotao btnOkTv; 
-extern NexImagem popUpErroLampada;
-extern NexTexto txtErroLampada;
-extern NexBotao btnErroLampada;
-
-extern NexImagem popUpErroProjetor;
-extern NexTexto txtErroProjetor;
-extern NexBotao btnOkProjetor;
-
-extern NexImagem popUpErroProjConfig;
-extern NexTexto txtErroProjConfig;
-extern NexBotao btnOkProjConfig;
-
-extern NexImagem popUpErroAc;
-extern NexTexto txtErroAc;
-extern NexBotao btnOkAc;
-
-extern NexImagem popUpErroTela;
-extern NexTexto txtErroTela;
-extern NexBotao btnErroTela;
+extern NexImagem popUpErroTela ;
+extern NexTexto txtErroTela ;
+extern NexBotao btnErroTela ;
 
 void configurarInicializacaoNextion();
 void loopNextion();

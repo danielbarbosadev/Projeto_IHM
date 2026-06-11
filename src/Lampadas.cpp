@@ -7,6 +7,7 @@
 #include "DebugManager.h"
 #include "Enum.h"
 #include "Lampadas.h"
+#include "IHM.h"
 
 void verificarMensagemLampadas(const String& mensagem)
 {
@@ -50,6 +51,10 @@ void verificarMensagemLampadas(const String& mensagem)
     if (doc["statusComando"]["situacao"].is<const char*>())
     {
         const char* situacao = doc["statusComando"]["situacao"].as<const char*>();
+        if(strstr(situacao, "[ERRO]") != nullptr)
+        {
+            mostrarErroLampada(situacao);
+        }
     }
 }
 
@@ -61,4 +66,11 @@ void enviarComandoLampada(const char* lampada, uint32_t comandoLampada)
     doc[lampada] = (bool)comandoLampada;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_LAMPADAS, mensagem.c_str());
+}
+
+void mostrarErroLampada(const char* mensagemErro)
+{
+    popUpErroLampada.visivel(true);
+    btnErroLampada.visivel(true);            
+    txtErroLampada.texto(mensagemErro).visivel(true);
 }
