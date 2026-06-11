@@ -88,9 +88,28 @@ extern NexBotaoDuplo Tela1;
 extern NexBotaoDuplo Tela2;
 extern NexBotaoDuplo todasTelas;
 
-extern NexImagem pop_ERRO;
-extern NexTexto txt_ERRO;
-extern NexBotao ERRO_OK;
+extern NexImagem popUpErroTv;
+extern NexTexto txtErroTv;
+extern NexBotao btnOkTv; 
+extern NexImagem popUpErroLampada;
+extern NexTexto txtErroLampada;
+extern NexBotao btnErroLampada;
+
+extern NexImagem popUpErroProjetor;
+extern NexTexto txtErroProjetor;
+extern NexBotao btnOkProjetor;
+
+extern NexImagem popUpErroProjConfig;
+extern NexTexto txtErroProjConfig;
+extern NexBotao btnOkProjConfig;
+
+extern NexImagem popUpErroAc;
+extern NexTexto txtErroAc;
+extern NexBotao btnOkAc;
+
+extern NexImagem popUpErroTela;
+extern NexTexto txtErroTela;
+extern NexBotao btnErroTela;
 
 void configurarInicializacaoNextion();
 void loopNextion();
