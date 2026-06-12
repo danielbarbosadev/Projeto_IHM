@@ -3,5 +3,5 @@
 
 void verificarMensagemLampadas(const String& mensagem);
 void enviarComandoLampada(const char* lampada, uint32_t comandoLampada);
-
+void mostrarErroLampada(const char* mensagemErro);
 #endif

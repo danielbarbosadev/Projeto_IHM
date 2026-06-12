@@ -7,6 +7,7 @@
 #include "DebugManager.h"
 #include "Enum.h"
 #include "Projetor.h"
+#include "IHM.h"
 
 char projetorEscolhido[32] = "";
 
@@ -35,10 +36,14 @@ void verificarMensagemProjetor(const String& mensagem)
         return;
     }
     
-    if (doc["statusComando"]["situacao"].is<const char*>())
-    {
-       const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
-    }
+      if (doc["statusComando"]["situacao"].is<const char*>())
+      {
+        const char* situacao = doc["statusComando"]["situacao"].as<const char*>();
+        if(strstr(situacao, "[ERRO]") != nullptr)
+        {
+            mostrarErroProjetor(situacao);
+        }
+      }
 }
 
 void enviarComandoProjetor(uint32_t comandoProjetor)
@@ -55,4 +60,11 @@ void enviarComandoProjetor(uint32_t comandoProjetor)
     doc[projetorEscolhido]["comando"] = comandoProjetor;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_PROJETOR, mensagem.c_str());
+}
+
+void mostrarErroProjetor(const char* mensagemErro)
+{
+    popUpErroProjetor.visivel(true);
+    btnOkProjetor.visivel(true);            
+    txtErroProjetor.texto(mensagemErro).visivel(true);
 }

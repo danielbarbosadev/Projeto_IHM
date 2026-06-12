@@ -7,6 +7,7 @@
 #include "DebugManager.h"
 #include "Enum.h"
 #include "Tela.h"
+#include "IHM.h"
 
 char telaEscolhida[32] = "";
 
@@ -36,9 +37,13 @@ void verificarMensagemTela(const String& mensagem)
     }
     
     if (doc["statusComando"]["situacao"].is<const char*>())
-    {
-       const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
-    }
+      {
+        const char* situacao = doc["statusComando"]["situacao"].as<const char*>();
+        if(strstr(situacao, "[ERRO]") != nullptr)
+        {
+            mostrarErroTela(situacao);
+        }
+      }
 }
 
 void enviarComandoTela(uint32_t comandoTela)
@@ -55,4 +60,11 @@ void enviarComandoTela(uint32_t comandoTela)
     doc[telaEscolhida]["comando"] = comandoTela;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_TELA, mensagem.c_str());
+}
+
+void mostrarErroTela(const char* mensagemErro)
+{
+    popUpErroTela.visivel(true);
+    btnErroTela.visivel(true);            
+    txtErroTela.texto(mensagemErro).visivel(true);
 }

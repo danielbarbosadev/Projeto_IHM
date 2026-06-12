@@ -7,6 +7,7 @@
 #include "DebugManager.h"
 #include "Enum.h"
 #include "Televisao.h"
+#include "IHM.h"
 
 void verificarMensagemTelevisao(const String& mensagem)
 {
@@ -36,6 +37,10 @@ void verificarMensagemTelevisao(const String& mensagem)
     if (doc["statusComando"]["situacao"].is<const char*>())
     {
        const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
+       if(strstr(situacao, "[ERRO]") != nullptr)
+        {
+            mostrarErroTelevisao(situacao);
+        }
     }
 }
 void enviarComandotelevisao(uint32_t comandoTelevisao)
@@ -46,4 +51,11 @@ void enviarComandotelevisao(uint32_t comandoTelevisao)
     doc["tv"]["comando"] = comandoTelevisao;
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_TELEVISAO, mensagem.c_str());
+}
+
+void mostrarErroTelevisao(const char* mensagemErro)
+{
+    popUpErroTv.visivel(true);
+    btnOkTv.visivel(true);            
+    txtErroTv.texto(mensagemErro).visivel(true);
 }

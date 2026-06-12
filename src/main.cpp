@@ -29,12 +29,12 @@ void tratarMensagemRecebida(const char *, const String &);
 
 void setup()
 {
-  configurarInicializacaoNextion();
-  configurarEventosNextion();
   configurarDebug();
   conectarWiFi();
   configurarMQTT();
   registrarCallbackMensagem(tratarMensagemRecebida);
+  configurarInicializacaoNextion();
+  configurarEventosNextion();
   conectarMQTT();
 }
 
