@@ -32,10 +32,10 @@ void setup()
   configurarDebug();
   conectarWiFi();
   configurarMQTT();
+  conectarMQTT();
   registrarCallbackMensagem(tratarMensagemRecebida);
   configurarInicializacaoNextion();
   configurarEventosNextion();
-  conectarMQTT();
 }
 
 void loop()
