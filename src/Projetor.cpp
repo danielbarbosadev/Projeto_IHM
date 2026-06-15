@@ -11,7 +11,7 @@
 
 char projetorEscolhido[32] = "";
 
-void verificarMensagemProjetor(const String& mensagem)
+void verificarMensagemProjetor(const String &mensagem)
 {
     JsonDocument doc;
 
@@ -35,20 +35,20 @@ void verificarMensagemProjetor(const String& mensagem)
         debugErro("Resposta da situação não foi enviada no JSON");
         return;
     }
-    
-      if (doc["statusComando"]["situacao"].is<const char*>())
-      {
-        const char* situacao = doc["statusComando"]["situacao"].as<const char*>();
-        if(strstr(situacao, "[ERRO]") != nullptr)
+
+    if (doc["statusComando"]["situacao"].is<const char *>())
+    {
+        const char *situacao = doc["statusComando"]["situacao"].as<const char *>();
+        if (strstr(situacao, "[ERRO]") != nullptr)
         {
             mostrarErroProjetor(situacao);
         }
-      }
+    }
 }
 
 void enviarComandoProjetor(uint32_t comandoProjetor)
 {
-    if(strlen(projetorEscolhido) == 0)
+    if (strlen(projetorEscolhido) == 0)
     {
         debugErro("Nenhum projetor foi escolhido");
         return;
@@ -62,9 +62,9 @@ void enviarComandoProjetor(uint32_t comandoProjetor)
     publicarMensagemNoTopico(TOPICO_PROJETOR, mensagem.c_str());
 }
 
-void mostrarErroProjetor(const char* mensagemErro)
+void mostrarErroProjetor(const char *mensagemErro)
 {
     popUpErroProjetor.visivel(true);
-    btnOkProjetor.visivel(true);            
+    btnOkProjetor.visivel(true);
     txtErroProjetor.texto(mensagemErro).visivel(true);
 }
