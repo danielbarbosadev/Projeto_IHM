@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#define NEX_BUFFER_CMD        128   // buffer de comandos serial
-#define NEX_MAX_COMPONENTES   80    // componentes registrados simultâneos
+#define NEX_BUFFER_CMD        128  
+#define NEX_MAX_COMPONENTES   80   
 #define NEX_TIMEOUT_MS  100
 
 #include <NextionUI.h>
@@ -343,7 +343,13 @@ void configurarEventosAc()
 
     display.escutar(PowerAC);
     PowerAC.aoSoltar([]()
-                     { enviarComandoAC(AC_POWER); });
+                     { 
+                        static uint8_t comandoPower = 0;
+                        comandoPower++;
+                        if(comandoPower > 1) comandoPower = 0;
+
+                        enviarComandoAC(comandoPower); 
+                    });
 
     display.escutar(AC_autoMode);
     AC_autoMode.aoSoltar([]()
