@@ -68,8 +68,8 @@ void configurarDebug()
 
     debugInfoSemLinha("\n\n\n\n\n\r");
     debugInfo("===============================================");
-    debugInfo(" ESP32 INICIADO");
-    debugInfo(" SISTEMA DE DEBUG ATIVO");
+    debugInfo("ESP32 INICIADO");
+    debugInfo("SISTEMA DE DEBUG ATIVO");
 
     if (nivelDebugAtual == DEBUG_TUDO)
     {

@@ -15,7 +15,7 @@
 void conectarWiFi()
 {
   debugInfo("===========================");
-  debugInfo("Iniciando conexão WiFi...");
+  debugInfo("Iniciando conexão Wi-Fi...");
   debugInfo("===========================");
 
   //*Configura o ESP32 com station, ou seja
@@ -23,7 +23,7 @@ void conectarWiFi()
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_SENHA);
 
-  debugInfo("Conectando");
+  debugInfoSemLinha("[INFO] Conectando");
 
   uint32_t tentativas = 0;
   const uint32_t maxTentativas = 30;
@@ -39,15 +39,16 @@ void conectarWiFi()
 
   if(WiFi.status() == WL_CONNECTED)
   {
-    debugInfo("WiFi conectado com sucesso!");
-    debugInfoSemLinha("Endereço IP: ");
+    debugInfo("Wi-Fi conectado com sucesso!");
+    debugInfoSemLinha("[INFO] Endereço IP: ");
     debugInfoSemLinha(WiFi.localIP().toString());
     debugInfoSemLinha("\n\r");
   }
   else
   {
-    debugErro("Falha ao conectar o WiFi.");
+    debugErro("Falha ao conectar o Wi-Fi.");
     debugErro("Verifique o SSID, senha e sinal de rede.");
+    //Alocar um buffer para poder mostrar na tela Nextion que o Wi-Fi deu erro
   }
 }
 
@@ -55,13 +56,13 @@ void garantirWiFiConectado()
 {
   if(WiFi.status() != WL_CONNECTED)
   {
-    debugInfo("WiFi desconectado. Tentando reconectar....");
+    debugInfo("Wi-Fi desconectado. Tentando reconectar....");
     conectarWiFi();
   }
 
   if(WiFi.status() != WL_CONNECTED)
   {
-    debugErro("Não foi possível reconectar ao WiFi.");
+    debugErro("Não foi possível reconectar ao Wi-Fi.");
   }
 }
 

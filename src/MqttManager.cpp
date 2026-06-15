@@ -88,9 +88,9 @@ void callbackInternoMQTT(char* topico, byte* payload, uint32_t tamanho)
 
 void configurarMQTT()
 {
-    debugInfo("=========================");
-    debugInfo(" Configurando MQTT...");
-    debugInfo("=========================");
+    debugInfo("====================");
+    debugInfo("Configurando MQTT...");
+    debugInfo("====================");
 
     if (USAR_AWS_IOT)
     {
