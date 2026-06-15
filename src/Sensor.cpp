@@ -6,6 +6,7 @@
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "Enum.h"
+#include "IHM.h"
 #include "Sensor.h"
 
 
@@ -38,6 +39,9 @@ void verificarMensagemSensor(const String& mensagem)
     {
        const char* situacao =  doc["statusComando"]["situacao"].as<const char*>();
     }
+    //TODO: COLOCAR JSON CERTO
+    //TODO: COLOCAR INFORMAÇÕES DO JSON NAS VARIÁVEIS   
+    //TODO: ENVIAR PARA A FUNÇÃO mostrarDadosSensor();
 }
 
 void enviarComandoSensor()
@@ -50,4 +54,11 @@ void enviarComandoSensor()
     serializeJson(doc, mensagem);
     publicarMensagemNoTopico(TOPICO_SENSOR, mensagem.c_str());
     enviarDados = false;
+}
+
+void mostrarDadosSensor(const char* temperatura, const char* umidade, const char* som)
+{
+    textoTemperatura.texto(temperatura);
+    textoUmidade.texto(umidade);
+    textoSom.texto(som);
 }
