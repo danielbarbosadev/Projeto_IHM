@@ -30,6 +30,7 @@ void verificarMensagemArCondicionado(const String& mensagem)
         return;
     }
 
+
     if (doc["statusComando"]["situacao"].isNull())
     {
         debugErro("Resposta da situação não foi enviada no JSON");
@@ -65,6 +66,6 @@ void enviarComandoAC(uint32_t comandoAC)
 void mostrarErroAc(const char* mensagemErro)
 {
     popUpErroAc.visivel(true);
-    //btnErroAc.visivel(true);            
+    btnOkAc.visivel(true);            
     txtErroAc.texto(mensagemErro).visivel(true);
 }
