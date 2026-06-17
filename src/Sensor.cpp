@@ -40,7 +40,7 @@ void verificarMensagemSensor(const String &mensagem)
     JsonObject sensores = doc["sensores"];
 
     if (!sensores["temperatura"].isNull())
- 	    {
+ 	{
         float temperatura = sensores["temperatura"].as<float>();
 
         if (leituraComErro(temperatura))
