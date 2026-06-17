@@ -1,9 +1,9 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include <Arduino.h>
+static bool leituraComErro(float valor);
 void verificarMensagemSensor(const String& mensagem);
 void enviarComandoSensor();
-void mostrarDadosSensor(const char* mensagemErro, const char* umidade, const char* som);
+void mostrarMensagemErro();
 
 #endif
