@@ -93,15 +93,15 @@ extern NexBotao AC_temp_DOWN;
 extern NexBotao AC_temp_UP;
 extern NexBotaoDuplo AC_ALL;
 extern NexBotao PowerAC;
-extern NexImagem popUpErroAc ;
-extern NexTexto txtErroAc ;
-extern NexBotao btnOkAc ;
+extern NexImagem popUpErroAc;
+extern NexTexto txtErroAc;
+extern NexBotao btnOkAc;
 
 //* BOTÕES TEMPERATURA
 extern NexBotao BotaoInicialSensor;
-extern NexTexto textoUmidade ;
-extern NexTexto textoTemperatura ;
-extern NexTexto textoSom ;
+extern NexTexto txtUmidade;
+extern NexTexto txtTemperatura;
+extern NexTexto txtSom;
 
 //* BOTÕES TELA
 extern NexBotao btnMenuInicialTela;
@@ -112,8 +112,8 @@ extern NexBotaoDuplo Tela1;
 extern NexBotaoDuplo Tela2;
 extern NexBotaoDuplo todasTelas;
 extern NexImagem popUpErroTela ;
-extern NexTexto txtErroTela ;
-extern NexBotao btnErroTela ;
+extern NexTexto txtErroTela;
+extern NexBotao btnErroTela;
 
 void configurarInicializacaoNextion();
 void loopNextion();

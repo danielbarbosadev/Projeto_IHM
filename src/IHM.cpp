@@ -117,9 +117,9 @@ NexBotao btnOkAc (6, 21, "ERRO_OK");
 
 //* BOTÕES TEMPERATURA
 NexBotao BotaoInicialSensor(7, 1, "BotaoInicial");
-NexTexto textoUmidade (7, 2, "t0");
-NexTexto textoTemperatura (7, 3, "t1");
-NexTexto textoSom (7, 4, "t2");
+NexTexto txtUmidade (7, 2, "t0");
+NexTexto txtTemperatura (7, 3, "t1");
+NexTexto txtSom (7, 4, "t2");
 
 //* BOTÕES TELA
 NexBotao btnMenuInicialTela(8, 1, "BotaoInicial");
